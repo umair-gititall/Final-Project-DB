@@ -1,0 +1,48 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LFMS</title>
+    <link rel="Icon" href="../assets/Favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="ReportItem.css" media="(min-width: 769px)">
+</head>
+
+<body>
+    <div class="main">
+        <a href="../index.html">
+            <button class="back"><img src="../Assets/Icons/Back.svg" id="BackIcon"></button>
+        </a>
+        <div class="header">Lost And Found Management System </div>
+        <div class='container'>
+            <div class="box">
+                <div class="upperbox">
+                    <div class="fields">
+                        <input type="email" placeholder="Email" id="input" required><br>
+                        <input type="text" placeholder="Phone" id="input" required><br>
+                        <input type="text" placeholder="Item" id="input" required><br>
+                        <input type="date" placeholder="Date" id="input" required><br>
+                        <input type="text" placeholder="Location" id="input" required><br>
+                    </div>
+                    <div class="images">
+                        <div id="ImagesPreview">
+                            Click here to add files~ 💕
+                        </div>
+                        <input type="file" id="ImagesInput" multiple
+                            accept=".png,.jpg,.jpeg,.gif,.pdf,.doc,.docx,.mp4,.mov,.avi" hidden />
+                    </div>
+                </div>
+                <div class="lowerbox">
+                    <textarea name="Description" id="Description"></textarea>
+                </div>
+            </div>
+            <a href="../index.html" id="ReportContainer">
+                <button id="button">Report</button>
+            </a>
+        </div>
+    </div>
+
+    <script src="ReportItem.js"></script>
+</body>
+
+</html>
