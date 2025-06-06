@@ -1,0 +1,197 @@
+@keyframes headerAnimation {
+    to { background-position: 100% }
+}
+@keyframes start {
+    from{
+        transform: translate(0px, -50px);
+    }
+    to{
+        transform: translate(0px, 0px);
+    }
+}
+@keyframes loading {
+    to{
+        height: 100%;
+        align-items: flex-start;
+        justify-content: center;
+    }
+}
+@keyframes fadeOut {
+    to {
+      opacity: 0;
+      visibility: hidden;
+      display: none;
+    }
+}
+@keyframes showUp {
+    to { 
+        opacity: 1;
+    }
+}
+
+.main {
+    height: 100%;
+    width: 100%;
+    background-image: linear-gradient(to right, aquamarine, navajowhite, pink);
+}
+
+.back{
+    height: 30px;
+    width: 50px;
+    margin: 15px 10px;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+#BackIcon{
+    position: relative;
+    z-index: 2;
+    height: 100%;
+    width: 80%;
+}
+
+.header{
+    height: 15%;
+    width: 100%;
+    z-index: 1;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font: 900 clamp(0.5em, 2.5vw, 2.5em) exo, cursive;
+    background: linear-gradient(90deg, rgb(234, 0, 255), aquamarine, rgb(234, 0, 255)) -100%/ 200%;
+    -webkit-background-clip: text;
+	background-clip: text;
+    color: transparent;
+    animation: 
+    headerAnimation 2s infinite ease-in-out,
+    start 2s linear forwards;
+}
+.container{
+    height: 70%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 20px;
+}
+
+#button {
+    font-family: fantasy;
+    font-size: large;
+    height: 20%;
+    margin-top: 10%;
+    width: 80%;
+    margin-left: 12%;
+    background-color: navajowhite;
+    text-align: center;
+    color: rgb(78, 78, 78);
+}
+
+.box {
+    height: 13%;
+    width: 58%;
+    border: 2px solid black;
+    display: flex;
+    justify-content: center;
+    justify-content: space-evenly;
+    align-items: center;
+    background-color: transparent;
+    flex-direction: row;
+    border-radius: 19px;
+    background-color: aquamarine;
+    box-shadow: 10px 10px;
+}
+#dataBox {
+    position: relative;
+    height: 13%;
+    width: 58%;
+    border: 2px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border-radius: 19px;
+    background-color: pink;
+    box-shadow: 10px 10px;
+    overflow: hidden;
+    resize: none;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    animation: loading 2s ease forwards 2s;
+}
+#dataBox::-webkit-scrollbar {
+    display: none;
+  }
+.dataWrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;    
+}
+#loadingText {
+    font-family: cursive;
+    font-size: large;
+    width: 100px;
+    text-align: center;
+    color: grey;
+    text-shadow: 1px 1px;
+    animation: fadeOut 1s forwards;
+    animation-delay: 2s;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+
+.field{
+    font-family: cursive;
+    width: 100px;
+    font-size: large;
+    border: none;
+    outline: none;
+    text-align: center;
+    color: grey;
+    text-shadow: 1px 1px;
+}
+
+#data {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    gap: 10px;
+    width: 95%;
+    opacity: 0;
+    justify-content: flex-start;
+    animation: showUp 1s forwards;
+    animation-delay: 3s;
+    padding: 0;
+    margin: 0;
+}
+
+.dataValues {
+    width: 95%;
+    padding: 10px;
+    margin: 15px;
+    border-radius: 12px;
+    background-color: transparent;
+    font-family: cursive;
+    font-size: smaller;
+    text-align: center;
+    color: black;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+    white-space: nowrap;
+    overflow-x: auto; 
+    overflow-y: hidden;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    resize: none;
+}
+.dataValues::-webkit-scrollbar {
+    display: none;
+}
