@@ -1,34 +1,5 @@
 @keyframes headerAnimation {
-    0% {
-        background: -webkit-linear-gradient(0deg, #FC466B 0%, #3F5EFB 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-    }
-    20% {
-        background: -webkit-linear-gradient(0deg, #FC466B 0%, #3F5EFB 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-    }
-    40% {
-        background: -webkit-linear-gradient(0deg, #FC466B 0%, #3F5EFB 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-    }
-    60% {
-        background: -webkit-linear-gradient(0deg, #3F5EFB 0%, #FC466B 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-    }
-    80% {
-        background: -webkit-linear-gradient(0deg, #FC466B 0%, #3F5EFB 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-    }
-    100% {
-        background: -webkit-linear-gradient(0deg, #3F5EFB 0%, #FC466B 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-    }
+    to { background-position: 100% }
 }
 @keyframes start {
     from{
@@ -51,8 +22,11 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    font-family: cursive;
-    background: -webkit-linear-gradient(aquamarine, navajowhite, pink);
+    font: 900 clamp(0.5em, 2.5vw, 2.5em) exo, cursive;
+    background: linear-gradient(90deg, rgb(234, 0, 255), aquamarine, rgb(234, 0, 255)) -100%/ 200%;
+    -webkit-background-clip: text;
+	background-clip: text;
+    color: transparent;
     animation: 
     headerAnimation 2s infinite ease-in-out,
     start 2s linear forwards;
