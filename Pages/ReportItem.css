@@ -10,6 +10,24 @@
     }
 }
 
+@keyframes expand {
+    to{
+        height: 90%;
+    }
+}
+
+@keyframes loaderAnimation {
+    to{
+        opacity: 0;
+    }
+}
+
+@keyframes show {
+    to{
+        opacity: 1;
+        transform: translate(0px, 0px);
+    }    
+}
 .main {
     height: 100%;
     width: 100%;
@@ -33,7 +51,7 @@
 }
 
 .header{
-    height: 15%;
+    height: 10%;
     width: 100%;
     position: relative;
     z-index: 1;
@@ -60,17 +78,24 @@
 }
 
 .box {
-    height: 60%;
+    height: 10%;
     width: 60%;
     border: 2px solid black;
-    border-radius: 50px;
+    border-radius: 19px;
     background-color: aquamarine;
     box-shadow: 10px 10px;
-    transition: height 2s;
+    animation: expand 2s ease forwards 2s;
 }
 
-.box:hover{
-    height:70%;
+#loader{
+    position: absolute;
+    top: 42%;
+    left: 47%;
+    font-family: cursive;
+    font-size: large;
+    color: grey;
+    text-shadow: 1px 1px;
+    animation: loaderAnimation 2s ease forwards 2s;
 }
 
 .upperbox{
@@ -78,6 +103,9 @@
     width: 100%;
     display: flex;
     justify-content: center;
+    opacity: 0;
+    transform: translate(0px, -15px);
+    animation: show 3s ease forwards 3s;
 }
 
 .fields{
@@ -87,18 +115,21 @@
     justify-content: center;
     flex-direction: column;
     gap: 5px;
+    opacity: 0;
+    transform: translate(0px, -15px);
+    animation: show 3s ease forwards 3s;
 }
 
 #input {
     font-family: cursive;
     font-size: large;
+    color: grey;
+    text-shadow: 1px 1px;
     transform: translate(0px,10px);
     background-color: transparent;
     border: none;
     outline: none;
     text-align: center;
-    color: grey;
-    text-shadow: 1px 1px;
 }
 
 .images{
@@ -135,6 +166,9 @@
     width: 100%;
     display: flex;
     justify-content: center;
+    opacity: 0;
+    transform: translate(0px, -15px);
+    animation: show 3s ease forwards 3s;
 }
 
 #Description
@@ -148,12 +182,12 @@
     text-shadow: 1px 1px;
     resize: none;
     outline: none;
-
+    
     overflow: auto;
     overflow: clip padding-box;
     scrollbar-width: none;
     -ms-overflow-style: none;
-
+    
     border: 2px solid black;
     border-radius: 30px;
     background-color: pink;
@@ -178,4 +212,7 @@
     background-color: navajowhite;
     text-align: center;
     color: rgb(78, 78, 78);
+    opacity: 0;
+    transform: translate(0px, 15px);
+    animation: show 3s ease forwards 3s;
 }

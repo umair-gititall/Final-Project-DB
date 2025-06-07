@@ -16,13 +16,14 @@
         <div class="header">Lost And Found Management System </div>
         <div class='container'>
             <div class="box">
+                <div id="loader">Loading</div>
                 <div class="upperbox">
                     <div class="fields">
-                        <input type="email" placeholder="Email" id="input" required><br>
-                        <input type="text" placeholder="Phone" id="input" required><br>
-                        <input type="text" placeholder="Item" id="input" required><br>
+                        <input type="email" placeholder="Email" id="input" required autocomplete="off"><br>
+                        <input type="text" placeholder="Phone" id="input" required autocomplete="off"><br>
+                        <input type="text" placeholder="Item" id="input" required autocomplete="off"><br>
                         <input type="date" placeholder="Date" id="input" required><br>
-                        <input type="text" placeholder="Location" id="input" required><br>
+                        <input type="text" placeholder="Location" id="input" required autocomplete="off"><br>
                     </div>
                     <div class="images">
                         <div id="ImagesPreview">
@@ -33,7 +34,7 @@
                     </div>
                 </div>
                 <div class="lowerbox">
-                    <textarea name="Description" id="Description"></textarea>
+                    <textarea name="Description" id="Description">Describe Item</textarea>
                 </div>
             </div>
             <a href="../index.html" id="ReportContainer">
