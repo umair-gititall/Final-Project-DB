@@ -237,6 +237,8 @@
     -webkit-backdrop-filter: blur(9.6px);
     border: 1px solid rgba(255, 255, 255, 0.8);
     animation: fadeOut2 0.8s ease forwards 0.8s;
+    pointer-events: none;
+    visibility: hidden;
 }
 .close{
     height: 5%;
@@ -323,6 +325,11 @@
     -ms-overflow-style: none;
     resize: none;
     border-radius: 30px;
-    box-shadow: 10px 10px;
+    box-shadow: 10px 10px black;
     border: 2px solid black;
+    cursor: pointer;
+    font-family: cursive;
+    font-size: large;
+    color: grey;
+    text-shadow: 1px 1px;
 }
