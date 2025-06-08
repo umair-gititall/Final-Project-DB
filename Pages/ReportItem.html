@@ -14,7 +14,7 @@
             <button class="back"><img src="../Assets/Icons/Back.svg" id="BackIcon"></button>
         </a>
         <div class="header">Lost And Found Management System </div>
-        <div class='container'>
+        <form action="../index.html" class="container">
             <div class="box">
                 <div id="loader">Loading</div>
                 <div class="upperbox">
@@ -34,13 +34,13 @@
                     </div>
                 </div>
                 <div class="lowerbox">
-                    <textarea name="Description" id="Description">Describe Item</textarea>
+                    <textarea name="Description" id="Description" placeholder="Describe Item" required></textarea>
                 </div>
             </div>
             <a href="../index.html" id="ReportContainer">
-                <button id="button">Report</button>
+                <button id="button" type="submit">Report</button>
             </a>
-        </div>
+        </form>
     </div>
 
     <script src="ReportItem.js"></script>

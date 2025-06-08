@@ -133,7 +133,7 @@
     align-items: center;
     flex-direction: column;    
 }
-#loadingText {
+#loader {
     font-family: cursive;
     font-size: large;
     width: 100px;
