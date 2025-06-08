@@ -23,9 +23,17 @@
       display: none;
     }
 }
+@keyframes fadeOut2 {
+    to {
+      transform: translate(0px, 30px);
+      opacity: 0;
+      display: none;
+    }
+}
 @keyframes showUp {
     to { 
         opacity: 1;
+        transform: translate(0px, 0px);
     }
 }
 
@@ -77,18 +85,6 @@
     gap: 20px;
 }
 
-#button {
-    font-family: fantasy;
-    font-size: large;
-    height: 20%;
-    margin-top: 10%;
-    width: 80%;
-    margin-left: 12%;
-    background-color: navajowhite;
-    text-align: center;
-    color: rgb(78, 78, 78);
-}
-
 .box {
     height: 13%;
     width: 58%;
@@ -103,7 +99,7 @@
     background-color: aquamarine;
     box-shadow: 10px 10px;
 }
-#dataBox {
+#DataBox {
     position: relative;
     height: 13%;
     width: 58%;
@@ -121,7 +117,7 @@
     -ms-overflow-style: none;
     animation: loading 2s ease forwards 2s;
 }
-#dataBox::-webkit-scrollbar {
+#DataBox::-webkit-scrollbar {
     display: none;
   }
 .dataWrapper {
@@ -133,7 +129,7 @@
     align-items: center;
     flex-direction: column;    
 }
-#loader {
+#Loader {
     font-family: cursive;
     font-size: large;
     width: 100px;
@@ -160,7 +156,7 @@
     text-shadow: 1px 1px;
 }
 
-#data {
+#Data {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
@@ -194,4 +190,139 @@
 }
 .dataValues::-webkit-scrollbar {
     display: none;
+}
+
+#Button {
+    width: 95%;
+    padding: 10px;
+    margin: 15px;
+    border-radius: 12px;
+    background-color: transparent;
+    font-family: fantasy;
+    font-size: large;
+    background-color: navajowhite;
+    text-align: center;
+    color: rgb(78, 78, 78);
+    cursor: pointer;
+}
+
+.applyPopUp{
+    height: 78%;
+    width: 70%;
+    top: 18%;
+    left: 15%;
+    transform: translate(0px, 30px);
+    position: fixed;
+    border-radius: 19px;
+    opacity: 0;
+    background: rgba(255, 255, 255, 0.31);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(9.6px);
+    -webkit-backdrop-filter: blur(9.6px);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    animation: showUp 0.8s ease forwards 0.8s;
+    z-index: 1;
+}
+
+.closePopUp{
+    height: 78%;
+    width: 70%;
+    top: 18%;
+    left: 15%;
+    position: fixed;
+    border-radius: 19px;
+    background: rgba(255, 255, 255, 0.31);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(9.6px);
+    -webkit-backdrop-filter: blur(9.6px);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    animation: fadeOut2 0.8s ease forwards 0.8s;
+}
+.close{
+    height: 5%;
+    width: 100%;
+    position: absolute;
+    display: flex;
+    justify-content: right;
+    margin: 15px -10px;
+}
+
+#Cross{
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    z-index: 2;
+}
+
+.verificationInfo{
+    height: 100%;
+    width: 65%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: -45px 0px;
+}
+
+#Photo{
+    height: 50%;
+    width: 90%;
+    border-radius: 50px;
+}
+
+
+#Answer
+{
+    height: 15%;
+    width: 70%;
+    margin: 20px 0px;
+    font-family: cursive;
+    font-size: smaller;
+    padding: 10px;
+    color: grey;
+    text-shadow: 1px 1px;
+    resize: none;
+    outline: none;
+    
+    overflow: auto;
+    overflow: clip padding-box;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    
+    border: 2px solid black;
+    border-radius: 30px;
+    background-color: pink;
+    box-shadow: 10px 10px black;
+}
+
+#Answer::-webkit-scrollbar {
+    display: none;
+}
+
+.images{
+    height: 100%;
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#ImagesPreview
+{
+    height: 65%;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: pink;
+    overflow: auto;
+    resize: vertical;  
+    overflow: clip padding-box;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    resize: none;
+    border-radius: 30px;
+    box-shadow: 10px 10px;
+    border: 2px solid black;
 }

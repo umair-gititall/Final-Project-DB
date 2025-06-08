@@ -21,18 +21,35 @@
                 <div class="field">Image</div>
                 <div class="field">Apply</div>
             </div>
-            <div id="dataBox">
+            <div id="DataBox">
                 <div class="dataWrapper">
-                    <div id="loader">Loading...</div>
-                    <div id="data">
+                    <div id="Loader">Loading...</div>
+                    <div id="Data">
                         <div class="dataValues"></div>
                         <div class="dataValues"></div>
                         <div class="dataValues"></div>
                         <div class="dataValues"></div>
-                        <div class="dataValues"></div>
+                        <button id="Button">Apply</button>
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+    <div id="ApplyPopUp" style="display: none;">
+        <div class="close">
+                <button id="Cross"><img src="../Assets/Icons/Cross.svg" alt="" id="BackIcon"></button>
+        </div>
+        <div class="verificationInfo">
+            <div id="Photo" style="border: 2px solid black;"></div>
+            <textarea name="Answer" id="Answer" placeholder="Q. Enter Your Question Here?"></textarea>
+        </div>
+        <div class="images">
+            <div id="ImagesPreview">
+                Click here to add files~ 💕
+            </div>
+            <input type="file" id="ImagesInput" multiple accept=".png,.jpg,.jpeg,.gif,.pdf,.doc,.docx,.mp4,.mov,.avi"
+                hidden />
+            <button id="button" style="width: 50%; margin: 25px;">Submit</button>
         </div>
     </div>
     <script src="ClaimItem.js"></script>
