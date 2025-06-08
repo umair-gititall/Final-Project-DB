@@ -37,6 +37,12 @@
     }
 }
 
+@keyframes delayButton {
+    to{
+        visibility: visible;
+    }
+}
+
 .main {
     height: 100%;
     width: 100%;
@@ -204,7 +210,24 @@
     text-align: center;
     color: rgb(78, 78, 78);
     cursor: pointer;
+    visibility: hidden;
+    animation: delayButton 3s ease forwards 3s;
 }
+
+#SubmitButton {
+    width: 95%;
+    padding: 10px;
+    margin: 15px;
+    border-radius: 12px;
+    background-color: transparent;
+    font-family: fantasy;
+    font-size: large;
+    background-color: navajowhite;
+    text-align: center;
+    color: rgb(78, 78, 78);
+    cursor: pointer;
+}
+
 
 .applyPopUp{
     height: 78%;
@@ -238,7 +261,6 @@
     border: 1px solid rgba(255, 255, 255, 0.8);
     animation: fadeOut2 0.8s ease forwards 0.8s;
     pointer-events: none;
-    visibility: hidden;
 }
 .close{
     height: 5%;
@@ -329,7 +351,7 @@
     border: 2px solid black;
     cursor: pointer;
     font-family: cursive;
-    font-size: large;
+    font-size: small;
     color: grey;
     text-shadow: 1px 1px;
 }
