@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Admin</title>
+    <link rel="stylesheet" href="Dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="main">
+        <div class="sidebar">
+            <ul class="sidebarList">
+                <li class="sidebarValues" id="Logo">
+                    <a href="Dashboard.html" class="ValuesLink">
+                        <span class="icon"><i class="fa fa-sliders"></i></span>
+                        <span class="text">Dashboard</span>
+                    </a>
+                </li>
+                <li class="sidebarValues">
+                    <a href="#" class="ValuesLink">
+                        <span class="icon"><i class="fa fa-envelope"></i></span>
+                        <span class="text">Claim Requests</span>
+                    </a>
+                </li>
+                <li class="sidebarValues">
+                    <a href="#" class="ValuesLink">
+                        <span class="icon"><i class="fa fa-box-open"></i></span>
+                        <span class="text">Fetch Items</span>
+                    </a>
+                </li>
+                <li class="sidebarValues">
+                    <a href="AddAdmin.html" class="ValuesLink">
+                        <span class="icon"><i class="fa fa-user-plus"></i></span>
+                        <span class="text">Add Admin</span>
+                    </a>
+                </li>
+                <li class="sidebarValues">
+                    <a href="#" class="ValuesLink">
+                        <span class="icon"><i class="fa fa-history"></i></span>
+                        <span class="text">History</span>
+                    </a>
+                </li>
+                <li class="sidebarValues" id="LogoutButton">
+                    <a href="AdminLogin.html" class="ValuesLink">
+                        <span class="icon"><i class="fa fa-right-from-bracket"></i></span>
+                        <span class="text">Logout</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="wrapper">
+            <span class="header">
+                <h1>Admin Panel</h1>
+            </span>
+            <span id="Icon">
+                <i class="fa fa-user" style="transform: scale(1.7);"></i>
+            </span>
+            <div class="box">
+                <div class="analyticsWrapper">
+                    <div id="AnalyticsSmallBox1">
+                        <h2>Claim Requests: </h2>
+                        <h2>Items: </h2>
+                    </div>
+                    <div id="Heading">System Overview</div>
+                    <div id="AnalyticsSmallBox2">
+                        <h2>Approved Claim Requests: </h2>
+                        <h2>Rejected Claim Requests: </h2>
+                        <h2>Total Admins: </h2>
+                        <h2>Unclaimed Items: </h2>
+                    </div>
+                </div>
+                <div id="AnalyticsBigBox">
+                    <div id="AdminNameHeader">
+                        <h1>Admin Name</h1>
+                    </div>
+                    <h2 class="textShadow">Approved Requests: </h2>
+                    <h2 class="textShadow">Rejected Requests: </h2>
+                    <h2 class="textShadow">Returned Items: </h2>
+                    <h2 class="textShadow"></h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
