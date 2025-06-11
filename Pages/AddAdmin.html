@@ -63,11 +63,11 @@
                 <div class="boxHeader">
                     <h1>Add Admin</h1>
                 </div>
-                <form action="Dashboard.html">
-                    <input type="email" placeholder="Email" id="Input" required autocomplete="off"><br>
-                    <input type="password" placeholder="Password" id="Input" required><br>
-                    <input type="text" placeholder="Name" id="Input" required autocomplete="off"><br>
-                    <a href="Dashboard.html"> <button type="submit" id="Button">Add</button>
+                <form action="AddAdmin.php" method="post">
+                    <input name="email" type="email" placeholder="Email" id="Input" required autocomplete="off"><br>
+                    <input name="password" type="password" placeholder="Password" id="Input" required><br>
+                    <input name="username" type="text" placeholder="Name" id="Input" required autocomplete="off"><br>
+                    <a href="AddAdmin.html"> <button type="submit" id="Button">Add</button>
                     </a>
                 </form>
             </div>
