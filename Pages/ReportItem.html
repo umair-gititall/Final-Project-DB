@@ -15,32 +15,35 @@
             <button class="back"><img src="../Assets/Icons/Back.svg" id="BackIcon"></button>
         </a>
         <div class="header">Lost And Found Management System </div>
-        <form action="../index.html" class="container">
+        <form action="ReportItem.php" method="post" enctype="multipart/form-data" class="container">
             <div class="box">
                 <div id="loader">Loading</div>
                 <div class="upperbox">
                     <div class="fields">
-                        <input type="email" placeholder="Email" id="input" required autocomplete="off"><br>
-                        <input type="text" placeholder="Phone" id="input" required autocomplete="off"><br>
-                        <input type="text" placeholder="Item" id="input" required autocomplete="off"><br>
-                        <input type="date" placeholder="Date" id="input" required><br>
-                        <input type="text" placeholder="Location" id="input" required autocomplete="off"><br>
+                        <input name="name" type="text" placeholder="Full Name" id="input" required
+                            autocomplete="off"><br>
+                        <input name="email" type="email" placeholder="Email" id="input" required autocomplete="off"><br>
+                        <input name="phone" type="text" placeholder="Phone" id="input" required autocomplete="off"><br>
+                        <input name="item" type="text" placeholder="Item" id="input" required autocomplete="off"><br>
+                        <input name="date" type="date" placeholder="Date" id="input" required><br>
+                        <input name="location" type="text" placeholder="Location" id="input" required
+                            autocomplete="off"><br>
                     </div>
                     <div class="images">
                         <div id="ImagesPreview">
                             <i>Click here to add files~ 💕</i>
                         </div>
-                        <input type="file" id="ImagesInput" multiple
-                            accept=".png,.jpg,.jpeg,.gif,.pdf,.doc,.docx,.mp4,.mov,.avi" hidden />
+                        <input name="images[]" type="file" id="ImagesInput" multiple accept=".png,.jpg,.jpeg,.gif"
+                            hidden />
                     </div>
                 </div>
                 <div class="lowerbox">
-                    <textarea name="Description" id="Description" placeholder="Describe Item" required></textarea>
+                    <textarea name="description" id="Description" placeholder="Describe Item" required></textarea>
                 </div>
             </div>
-            <a href="../index.html" id="ReportContainer">
+            <div id="ReportContainer">
                 <button id="button" type="submit">Report</button>
-            </a>
+            </div>
         </form>
     </div>
 
