@@ -1,5 +1,5 @@
 @keyframes headerAnimation {
-    to { background-position: 100% }
+    to { background-position: 100%; }
 }
 @keyframes start {
     from{
@@ -10,10 +10,50 @@
     }
 }
 
+.cursor {
+    width: 20px;
+    height: 20px;
+    background: radial-gradient(circle at 30% 30%, 
+        rgba(255, 255, 255, 0.4) 0%, 
+        rgba(255, 255, 255, 0.15) 30%, 
+        rgba(255, 255, 255, 0.05) 70%, 
+        rgba(255, 255, 255, 0.1) 100%);
+    border-radius: 50%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: transform 0.1s ease-out, width 0.2s ease, height 0.2s ease;
+    backdrop-filter: blur(8px);
+    box-shadow: 
+        0 0 15px rgba(255, 255, 255, 0.2),
+        inset 2px 2px 6px rgba(255, 255, 255, 0.4),
+        inset -2px -2px 6px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.cursor.hover {
+    width: 40px;
+    height: 40px;
+    background: radial-gradient(circle at 30% 30%, 
+        rgba(255, 255, 255, 0.5) 0%, 
+        rgba(255, 255, 255, 0.2) 30%, 
+        rgba(255, 255, 255, 0.08) 70%, 
+        rgba(255, 255, 255, 0.15) 100%);
+    backdrop-filter: blur(12px);
+    box-shadow: 
+        0 0 25px rgba(255, 255, 255, 0.3),
+        inset 3px 3px 8px rgba(255, 255, 255, 0.5),
+        inset -3px -3px 8px rgba(0, 0, 0, 0.1);
+}
+
 *{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    cursor: none;
 }
 
 .main {
@@ -38,7 +78,6 @@
     width: 80%;
     position: relative;
     display: flex;
-    transform: translate(0,70px);
     justify-content: space-evenly;
     font: 900 clamp(0.5em, 1.5vw, 1.0em) exo, cursive;
     background: linear-gradient(90deg, rgb(234, 0, 255), aquamarine, rgb(234, 0, 255)) -100%/ 200%;
@@ -48,6 +87,41 @@
     animation: 
     headerAnimation 2s infinite ease-in-out,
     start 2s linear forwards;
+    z-index: 1;
+}
+
+.profileDiv{
+    height: 50px;
+    width: 100%;
+    position: absolute;
+    top: 30px;
+    left: 0;
+    display: flex;
+    justify-content: right;
+    align-items: center;
+}
+
+.status{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-right: 2%;
+    font-family: cursive;
+    background: linear-gradient(90deg, rgb(234, 0, 255), aquamarine, rgb(234, 0, 255)) -100%/ 200%;
+    -webkit-background-clip: text;
+	background-clip: text;
+    color: transparent;
+    animation: 
+    headerAnimation 2s infinite ease-in-out;
+}
+
+.profileIcon{
+    height: 60px;
+    width: 60px;
+    border-radius: 22px;
+    overflow: hidden;
+    border-color: aqua;
+    border-style: double;
 }
 
 .sidebarList{
