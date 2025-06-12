@@ -66,11 +66,11 @@
                 <h1>Admin Panel</h1>
             </span>
             <?php
-                $servername = "lovely-pug-36.telebit.io";
+                $servername = "5.5.5.5";
                 $username = "abdullah";
                 $password = "abdullah";
                 $database = "LostFoundDB";
-                $port = 46741;
+                $port = 3306;
                 
                 $conn = new mysqli($servername, $username, $password, $database, $port);
 

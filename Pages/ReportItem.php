@@ -1,17 +1,10 @@
 <?php
-
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-
-$servername = "5.5.5.5";
-$username = "abdullah";
+$host = "5.5.5.5";
+$user = "abdullah";
 $password = "abdullah";
-$database = "LostFoundDB";
-$port = 3306;
+$dbname = "LostFoundDB"; 
 
-$conn = new mysqli($servername, $username, $password, $database, $port);
-
-
+$conn = new mysqli($host, $user, $password, $dbname);
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
@@ -24,10 +17,11 @@ $date = $_POST['date'];
 $location = $_POST['location'];
 $description = $_POST['description'];
 
-// Check if reporter exists 💻💕
+// Insert into main report table
+
 $sql_check = "SELECT ReporterID FROM Reporter WHERE Email = '$email'";
 $result_check = $conn->query($sql_check);
-
+echo "asdasd";
 if ($result_check->num_rows == 0) {
     $sql = "INSERT INTO Reporter (Email, PhoneNo, ReporterName) VALUES('$email','$phone','$name')";
     $conn->query($sql);
@@ -36,38 +30,63 @@ if ($result_check->num_rows == 0) {
 $sql2 = "SELECT ReporterID FROM Reporter WHERE Email = '$email'";
 $query_run = $conn->query($sql2);
 
+
 if ($query_run) {
     $row = $query_run->fetch_assoc(); 
     
     $reporterid = $row['ReporterID'];
     $sql3 = "INSERT INTO Item (ItemName, Description, Found_Date, Found_Location, ReporterID) VALUES ('$item', '$description', '$date', '$location', '$reporterid')";
-    $conn->query($sql3);
+    $query_run2 = $conn->query($sql3);
+    
+    $sql4 = "SELECT ItemID FROM Item ORDER BY ItemID DESC LIMIT 1";
+    $query_run3 = $conn->query($sql4);
+    $row = $query_run3->fetch_assoc();
 
+    $itemid = $row['ItemID'];
+
+    
     $targetDir = "../Assets/Reported Images/" . $reporterid . "/";
     if (!is_dir($targetDir)) {
         mkdir($targetDir, 0777, true);
+        chown($targetDir, 'abc');
+        chgrp($targetDir, 'abc');
     }
 
-    $imageCount = count(glob($targetDir . "*.*"));
-    $allowedTypes = ['jpg', 'jpeg', 'png', 'gif'];
+    $targetDir2 = "../Assets/Reported Images/" . $reporterid . "/" . $itemid . "/";
+    if (!is_dir($targetDir2)) {
+        mkdir($targetDir2, 0777, true);
+        chown($targetDir, 'abc');
+        chgrp($targetDir, 'abc');
+    }
 
-    if (isset($_FILES['images']) && isset($_FILES['images']['tmp_name']) && is_array($_FILES['images']['tmp_name'])) {
-        foreach ($_FILES['images']['tmp_name'] as $index => $tmpName) {
-            $originalName = $_FILES['images']['name'][$index];
-            $extension = strtolower(pathinfo($originalName, PATHINFO_EXTENSION));
-            
-            if (in_array($extension, ['jpg', 'jpeg', 'png', 'gif'])) {
-                $imageCount++;
-                $newFileName = $imageCount . "." . $extension;
-                $targetFilePath = $targetDir . $newFileName;
-                move_uploaded_file($tmpName, $targetFilePath);
-            }
+
+    $uploadedFiles = $_FILES['files'];
+    $totalFiles = count($uploadedFiles['name']);
+    
+    for ($i = 0; $i < $totalFiles; $i++) {
+        $tmpName = $uploadedFiles['tmp_name'][$i];
+        $originalName = basename($uploadedFiles['name'][$i]);
+        $ext = pathinfo($originalName, PATHINFO_EXTENSION);
+        $ext = strtolower($ext);
+
+        // Only allow certain image types
+        if (!in_array($ext, ['jpg', 'jpeg', 'png', 'gif'])) continue;
+
+        // Create unique filename based on report ID
+        $newFileName = ($i + 1) . "." . $ext;
+        $targetPath = $targetDir2 . $newFileName;
+
+        if (move_uploaded_file($tmpName, $targetPath)) {
+            // Optional: Store filename in a separate images table
+            $imgSql = "INSERT INTO ItemPhoto (ItemID, Path, Description) VALUES ('$itemid', '$targetPath', '$newFileName')";
+            $imgStmt = $conn->query($imgSql);
         }
-    } else {
-        echo "No images uploaded~ 😳📸";
     }
+
+    echo "Report submitted successfully!";
+} else {
+    echo "Failed to submit report.";
 }
 
 $conn->close();
-
 ?>

@@ -1,7 +1,9 @@
-  const input = document.getElementById("ImagesInput");
-  const previewBox = document.getElementById("ImagesPreview");
+const input = document.getElementById("ImagesInput");
+const previewBox = document.getElementById("ImagesPreview");
+const form = document.querySelector("form");
+const reportBtn = document.getElementById("button");
 
-  const iconMap = {
+const iconMap = {
     'pdf': 'pdf.png',
     'doc': 'word.png',
     'docx': 'word.png',
@@ -12,67 +14,86 @@
     'mp4': 'video.png',
     'mov': 'video.png',
     'avi': 'video.png'
-  };
+};
 
-  const addedFiles = new Set();
+const addedFiles = new Map();
 
-  previewBox.addEventListener("click", (e) => {
-    if (e.target.classList.contains("remove-btn")) return;
-    input.click();
-  });
+previewBox.addEventListener("click", (e) => {
+    if (e.target.classList.contains("remove-btn")) {
+        const fileName = e.target.dataset.filename;
+        const fileBox = e.target.parentElement;
+        addedFiles.delete(fileName);
+        fileBox.remove();
+        return;
+    }
 
-  input.addEventListener("change", () => {
+    if (e.target.id === "uploadIcon" || e.target.closest("#uploadIcon")) {
+        input.click();
+    }
+});
+
+input.addEventListener("change", () => {
     Array.from(input.files).forEach(file => {
-      if (addedFiles.has(file.name)) return;
-      addedFiles.add(file.name);
+        if (addedFiles.has(file.name)) return;
 
-      const ext = file.name.split('.').pop().toLowerCase();
-      const icon = iconMap[ext] || 'file.png';
+        addedFiles.set(file.name, file);
 
-      const container = document.createElement("div");
-      container.style.display = "flex";
-      container.style.alignItems = "center";
-      container.style.marginTop = "2px";
-      container.style.gap = "5px";
+        const ext = file.name.split('.').pop().toLowerCase();
+        const icon = iconMap[ext] || 'file.png';
 
-      const iconImg = document.createElement("img");
-      iconImg.src = `../Assets/Icons/Upload.svg`;
-      iconImg.style.width = "20px";
-      iconImg.style.height = "20px";
+        const fileBox = document.createElement("div");
+        fileBox.classList.add("file-box");
+        fileBox.innerHTML = `
+            <img src="../Assets/Icons/${icon}" alt="${ext}" width="30">
+            <span>${file.name}</span>
+            <img src="../Assets/Icons/trash.png" class="remove-btn" data-filename="${file.name}" title="Remove" style="width:18px; margin-left:8px; cursor:pointer;">
+        `;
+        previewBox.appendChild(fileBox);
+    });
+});
 
-      const fileName = document.createElement("span");
-      fileName.textContent = file.name;
-      fileName.style.flex = "1";
-      fileName.style.fontFamily = "cursive";
-      fileName.style.fontSize = "smaller"
+form.addEventListener("submit", function (e) {
+    e.preventDefault();
 
-      const removeBtn = document.createElement("img");
-      removeBtn.src = `../Assets/Icons/Delete.svg`;
-      removeBtn.className = "remove-btn";
-      removeBtn.style.cursor = "pointer";
-      removeBtn.style.height = "15px";
-      removeBtn.style.width = "15px";
-      removeBtn.title = "Remove file";
-      removeBtn.onclick = (event) => {
-        event.stopPropagation();
-        previewBox.removeChild(container);
-        addedFiles.delete(file.name);
-      };
+    const email = form.querySelector('input[placeholder="Email"]').value;
+    const phone = form.querySelector('input[placeholder="Phone"]').value;
+    const item = form.querySelector('input[placeholder="Item"]').value;
+    const date = form.querySelector('input[type="date"]').value;
+    const location = form.querySelector('input[placeholder="Location"]').value;
+    const description = document.getElementById("Description").value;
 
-      container.appendChild(iconImg);
-      container.appendChild(fileName);
-      container.appendChild(removeBtn);
-      previewBox.appendChild(container);
+    const formData = new FormData();
+    formData.append("email", email);
+    formData.append("phone", phone);
+    formData.append("item", item);
+    formData.append("date", date);
+    formData.append("location", location);
+    formData.append("description", description);
+
+    addedFiles.forEach(file => {
+        formData.append("files[]", file);
     });
 
-    input.value = "";
-  });
+    fetch("ReportItem.php", {
+        method: "POST",
+        body: formData
+    })
+    .then(res => res.text())
+    .then(data => {
+        alert(data);
+        window.location.href = "../index.html";
+    })
+    .catch(err => {
+        console.error("Upload failed", err);
+        alert("Failed to submit. Please try again.");
+    });
+});
 
-
-const words = ["Loading.", "Loading..", "Loading..."];
-let index = 0;
-
-setInterval(() => {
-  document.getElementById("loader").textContent = words[index];
-  index = (index + 1) % words.length;
-}, 200);
+window.addEventListener("DOMContentLoaded", () => {
+    const uploadIcon = document.createElement("img");
+    uploadIcon.src = "../Assets/Icons/upload.png";
+    uploadIcon.alt = "Upload";
+    uploadIcon.id = "uploadIcon";
+    uploadIcon.style = "width: 32px; cursor: pointer;";
+    previewBox.appendChild(uploadIcon);
+});
