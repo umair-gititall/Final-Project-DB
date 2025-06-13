@@ -1,10 +1,10 @@
 <?php
     session_start();
-    $servername = "lovely-pug-36.telebit.io";
+    $servername = "5.5.5.5";
     $username = "abdullah";
     $password = "abdullah";
     $database = "LostFoundDB";
-    $port = 46741;
+    $port = 3306;
                         
     $conn = new mysqli($servername, $username, $password, $database, $port);
 
@@ -23,7 +23,7 @@
     
     if ($row = $result->fetch_assoc())
     {
-        if ($password === $row['Password']) 
+        if (password_verify($password, $row['Password'])) 
         {
             $_SESSION['Admin_ID'] = $row['Admin_ID'];
             header("Location: Dashboard.php");

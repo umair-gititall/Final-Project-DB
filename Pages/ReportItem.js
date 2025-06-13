@@ -55,6 +55,7 @@ input.addEventListener("change", () => {
 form.addEventListener("submit", function (e) {
     e.preventDefault();
 
+    const name = form.querySelector('input[placeholder="Name"]').value;
     const email = form.querySelector('input[placeholder="Email"]').value;
     const phone = form.querySelector('input[placeholder="Phone"]').value;
     const item = form.querySelector('input[placeholder="Item"]').value;
@@ -63,6 +64,7 @@ form.addEventListener("submit", function (e) {
     const description = document.getElementById("Description").value;
 
     const formData = new FormData();
+    formData.append("name", name);
     formData.append("email", email);
     formData.append("phone", phone);
     formData.append("item", item);
@@ -97,3 +99,13 @@ window.addEventListener("DOMContentLoaded", () => {
     uploadIcon.style = "width: 32px; cursor: pointer;";
     previewBox.appendChild(uploadIcon);
 });
+
+
+
+const words = ["Loading.", "Loading..", "Loading..."];
+let index = 0;
+
+setInterval(() => {
+  document.getElementById("loader").textContent = words[index];
+  index = (index + 1) % words.length;
+}, 200);

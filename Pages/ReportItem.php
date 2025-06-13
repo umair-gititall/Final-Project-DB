@@ -21,7 +21,7 @@ $description = $_POST['description'];
 
 $sql_check = "SELECT ReporterID FROM Reporter WHERE Email = '$email'";
 $result_check = $conn->query($sql_check);
-echo "asdasd";
+
 if ($result_check->num_rows == 0) {
     $sql = "INSERT INTO Reporter (Email, PhoneNo, ReporterName) VALUES('$email','$phone','$name')";
     $conn->query($sql);
@@ -48,15 +48,11 @@ if ($query_run) {
     $targetDir = "../Assets/Reported Images/" . $reporterid . "/";
     if (!is_dir($targetDir)) {
         mkdir($targetDir, 0777, true);
-        chown($targetDir, 'abc');
-        chgrp($targetDir, 'abc');
     }
 
     $targetDir2 = "../Assets/Reported Images/" . $reporterid . "/" . $itemid . "/";
     if (!is_dir($targetDir2)) {
         mkdir($targetDir2, 0777, true);
-        chown($targetDir, 'abc');
-        chgrp($targetDir, 'abc');
     }
 
 

@@ -21,7 +21,7 @@ $password = $_POST['password'];
 $username = $_POST['username'];
 $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
-$sql = "INSERT INTO Admin (Name, Email, Password) VALUES('$username', '$email','$password')";
+$sql = "INSERT INTO Admin (Name, Email, Password) VALUES('$username', '$email','$hashedPassword')";
 $conn->query($sql);
 
 
