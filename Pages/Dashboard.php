@@ -1,6 +1,6 @@
 <?php
     session_start();
-    if (!isset($_SESSION['Admin_ID'])) {
+    if (!isset($_SESSION['admin_token'])) {
         header("Location: AdminLogin.html");
         exit();
     }
@@ -42,7 +42,7 @@
                     </a>
                 </li>
                 <li class="sidebarValues">
-                    <a href="AddAdmin.html" class="ValuesLink">
+                    <a href="AddAdmin.php" class="ValuesLink">
                         <span class="icon"><i class="fa fa-user-plus"></i></span>
                         <span class="text">Add Admin</span>
                     </a>
@@ -54,7 +54,7 @@
                     </a>
                 </li>
                 <li class="sidebarValues" id="LogoutButton">
-                    <a href="AdminLogin.html" class="ValuesLink">
+                    <a href="Logout.php" class="ValuesLink">
                         <span class="icon"><i class="fa fa-right-from-bracket"></i></span>
                         <span class="text">Logout</span>
                     </a>
@@ -66,9 +66,9 @@
                 <h1>Admin Panel</h1>
             </span>
             <?php
-                $servername = "5.5.5.5";
-                $username = "abdullah";
-                $password = "abdullah";
+                $servername = "localhost";
+                $username = "root";
+                $password = "";
                 $database = "LostFoundDB";
                 $port = 3306;
                 

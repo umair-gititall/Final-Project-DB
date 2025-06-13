@@ -1,3 +1,13 @@
+<?php
+
+session_start();
+if (!isset($_SESSION['admin_token'])) {
+    header("Location: AdminLogin.html");
+    exit();
+}
+
+?>
+
 <html lang="en">
 
 <head>
@@ -45,7 +55,7 @@
                     </a>
                 </li>
                 <li class="sidebarValues" id="LogoutButton">
-                    <a href="AdminLogin.html" class="ValuesLink">
+                    <a href="Logout.php" class="ValuesLink">
                         <span class="icon"><i class="fa fa-right-from-bracket"></i></span>
                         <span class="text">Logout</span>
                     </a>
