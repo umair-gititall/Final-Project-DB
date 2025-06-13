@@ -1,16 +1,16 @@
 <?php
 
 session_start();
-if (!isset($_SESSION['admin_token'])) {
+if (!isset($_SESSION['Admin_Token'])) {
     header("Location: AdminLogin.html");
     exit();
 }
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-$servername = "localhost";
-$username = "root";
-$password = "";
+$servername = "5.5.5.5";
+$username = "abdullah";
+$password = "abdullah";
 $database = "LostFoundDB";
 $port = 3306;
 
@@ -40,7 +40,7 @@ if ($conn->connect_error) {
         <div class="sidebar">
             <ul class="sidebarList">
                 <li class="sidebarValues" id="Logo">
-                    <a href="Dashboard.html" class="ValuesLink">
+                    <a href="Dashboard.php" class="ValuesLink">
                         <span class="icon"><i class="fa fa-sliders"></i></span>
                         <span class="text">Dashboard</span>
                     </a>
@@ -52,13 +52,13 @@ if ($conn->connect_error) {
                     </a>
                 </li>
                 <li class="sidebarValues">
-                    <a href="FetchItem.html" class="ValuesLink">
+                    <a href="FetchItem.php" class="ValuesLink">
                         <span class="icon"><i class="fa fa-box-open"></i></span>
                         <span class="text">Fetch Items</span>
                     </a>
                 </li>
                 <li class="sidebarValues">
-                    <a href="AddAdmin.html" class="ValuesLink">
+                    <a href="AddAdmin.php" class="ValuesLink">
                         <span class="icon"><i class="fa fa-user-plus"></i></span>
                         <span class="text">Add Admin</span>
                     </a>
@@ -89,9 +89,9 @@ if ($conn->connect_error) {
                     <h1>Add Admin</h1>
                 </div>
                 <form action="" method="post">
+                    <input name="username" type="text" placeholder="Name" id="Input" required autocomplete="off"><br>
                     <input name="email" type="email" placeholder="Email" id="Input" required autocomplete="off"><br>
                     <input name="password" type="password" placeholder="Password" id="Input" required><br>
-                    <input name="username" type="text" placeholder="Name" id="Input" required autocomplete="off"><br>
                     <a href="AddAdmin.html"> <button type="submit" id="Button">Add</button>
                     </a>
                 </form>

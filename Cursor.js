@@ -12,7 +12,7 @@ document.addEventListener('mousemove', (e) => {
 
 // Smooth cursor following animation
 function animateCursor() {
-    const speed = 0.15;
+    const speed = 0.3;
     cursorX += (mouseX - cursorX) * speed;
     cursorY += (mouseY - cursorY) * speed;
     

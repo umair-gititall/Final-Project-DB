@@ -1,7 +1,7 @@
 <?php
 
 session_start();
-if (!isset($_SESSION['admin_token'])) {
+if (!isset($_SESSION['Admin_Token'])) {
     header("Location: AdminLogin.html");
     exit();
 }
@@ -25,7 +25,7 @@ if (!isset($_SESSION['admin_token'])) {
         <div class="sidebar">
             <ul class="sidebarList">
                 <li class="sidebarValues" id="Logo">
-                    <a href="Dashboard.html" class="ValuesLink">
+                    <a href="Dashboard.php" class="ValuesLink">
                         <span class="icon"><i class="fa fa-sliders"></i></span>
                         <span class="text">Dashboard</span>
                     </a>
@@ -37,19 +37,19 @@ if (!isset($_SESSION['admin_token'])) {
                     </a>
                 </li>
                 <li class="sidebarValues">
-                    <a href="FetchItem.html" class="ValuesLink">
+                    <a href="FetchItem.php" class="ValuesLink">
                         <span class="icon"><i class="fa fa-box-open"></i></span>
                         <span class="text">Fetch Items</span>
                     </a>
                 </li>
                 <li class="sidebarValues">
-                    <a href="AddAdmin.html" class="ValuesLink">
+                    <a href="AddAdmin.php" class="ValuesLink">
                         <span class="icon"><i class="fa fa-user-plus"></i></span>
                         <span class="text">Add Admin</span>
                     </a>
                 </li>
                 <li class="sidebarValues">
-                    <a href="History.html" class="ValuesLink">
+                    <a href="History.php" class="ValuesLink">
                         <span class="icon"><i class="fa fa-history"></i></span>
                         <span class="text">History</span>
                     </a>

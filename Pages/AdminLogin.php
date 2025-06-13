@@ -1,8 +1,8 @@
 <?php
     session_start();
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
+    $servername = "5.5.5.5";
+    $username = "abdullah";
+    $password = "abdullah";
     $database = "LostFoundDB";
     $port = 3306;
                         
@@ -27,7 +27,7 @@
         {
             session_regenerate_id(true);
             $_SESSION['Admin_ID'] = $row['Admin_ID'];
-            $_SESSION['admin_token'] = bin2hex(random_bytes(32));
+            $_SESSION['Admin_Token'] = bin2hex(random_bytes(32));
             header("Location: Dashboard.php");
             exit();
         } 
