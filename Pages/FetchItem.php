@@ -20,7 +20,9 @@ if (!isset($_SESSION['Admin_Token'])) {
 </head>
 
 <body>
-    <div class="cursor" id="cursor"></div>
+    <div class="curzr" hidden>
+        <div class="curzr-dot"></div>
+    </div>
     <div class="main">
         <div class="sidebar">
             <ul class="sidebarList">
