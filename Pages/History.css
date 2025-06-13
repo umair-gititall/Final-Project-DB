@@ -399,8 +399,3 @@
 .dataValues::-webkit-scrollbar {
     display: none;
 }
-
-div{
-    border: 2px solid black;
-}
-
