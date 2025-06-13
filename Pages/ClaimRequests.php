@@ -15,7 +15,7 @@ if (!isset($_SESSION['Admin_Token'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Claim Item</title>
     <link rel="Icon" href="../assets/Favicon.png" type="image/x-icon">
-    <link rel="stylesheet" href="FetchItem.css" media="(min-width: 769px)">
+    <link rel="stylesheet" href="ClaimRequests.css" media="(min-width: 769px)">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 
@@ -78,9 +78,9 @@ if (!isset($_SESSION['Admin_Token'])) {
             <div class="container">
                 <div class="box">
                     <div class="field" style="margin-left: -30px;">Item</div>
-                    <div class="field" style="margin-left: 10px;">Reporter Phone</div>
-                    <div class="field" style="margin-left: 5px;">Reporter Email</div>
-                    <div class="field" style="margin-right: -20px;">Fetch</div>
+                    <div class="field" style="margin-left: 10px;">User Phone</div>
+                    <div class="field" style="margin-left: 5px;">User Email</div>
+                    <div class="field" style="margin-right: -20px;">Detail</div>
                 </div>
                 <div id="DataBox">
                     <div class="dataWrapper">
@@ -102,11 +102,15 @@ if (!isset($_SESSION['Admin_Token'])) {
         </div>
         <div class="verificationInfo">
             <div id="Photo" style="border: 2px solid black;"></div>
-            <textarea name="Answer" id="Answer" placeholder="Q. Enter Your Question Here?"></textarea>
-            <button id="SubmitButton" style="width: 30%; margin: 25px;">Fetch</button>
+            <textarea name="Answer" id="Answer">Answer Here</textarea>
+
+            <div class="action-buttons">
+                <button class="approve-btn">&nbsp<i class="fa-solid fa-check"></i></button>
+                <button class="reject-btn">&nbsp<i class="fa-solid fa-xmark"></i></button>
+            </div>
         </div>
     </div>
-    <script src="FetchItem.js"></script>
+    <script src="ClaimRequests.js"></script>
     <script src="../Cursor.js"></script>
 </body>
 

@@ -32,7 +32,7 @@
                     </a>
                 </li>
                 <li class="sidebarValues">
-                    <a href="#" class="ValuesLink">
+                    <a href="ClaimRequests.php" class="ValuesLink">
                         <span class="icon"><i class="fa fa-envelope"></i></span>
                         <span class="text">Claim Requests</span>
                     </a>
