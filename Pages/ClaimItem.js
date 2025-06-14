@@ -61,8 +61,6 @@ form.addEventListener("submit", function (e) {
     const answer = form.querySelector('input[name="Answer"]').value;
     const itemid = form.querySelector('input[name="ItemID"]').value;
 
-    console.log(name);
-
     const formData = new FormData();
     formData.append("Name", name);
     formData.append("Email", email);
@@ -133,3 +131,30 @@ setInterval(() => {
   document.getElementById("Loader").textContent = words[index];
   index = (index + 1) % words.length;
 }, 200);
+
+
+
+//Images SlideShow
+let slideIndex = 0;
+const slides = document.querySelectorAll(".mySlides");
+const dots = document.querySelectorAll(".dot");
+let timer;
+
+function showSlide(index) {
+    slides.forEach((slide, i) => {
+        slide.classList.remove("active");
+    });
+
+    slideIndex = (index + slides.length) % slides.length;
+
+    slides[slideIndex].classList.add("active");
+  console.log(slides.length);
+    clearTimeout(timer);
+    timer = setTimeout(() => showSlide(slideIndex + 1), 5000);
+}
+
+function changeSlide(n) {
+    showSlide(slideIndex + n);
+}
+
+showSlide(slideIndex);
