@@ -5,7 +5,7 @@ if (!isset($_SESSION['Admin_Token'])) {
     header("Location: AdminLogin.html");
     exit();
 }
-
+$adminID = $_SESSION['Admin_ID'];
 ?>
 
 <html lang="en">
@@ -69,10 +69,25 @@ if (!isset($_SESSION['Admin_Token'])) {
             <span class="header">
                 <h1>Admin Panel</h1>
             </span>
+            <?php
+                $servername = "5.5.5.5";
+                $username = "abdullah";
+                $password = "abdullah";
+                $database = "LostFoundDB";
+                $port = 3306;
+                
+                $conn = new mysqli($servername, $username, $password, $database, $port);
+
+                $sql10 = "Select Name from Admin where Admin_ID = '$adminID'";
+                $query_run10 = $conn->query($sql10);
+                if ($query_run10) {
+                    $row = $query_run10->fetch_assoc(); 
+                }
+            ?>
             <div class="profileDiv">
                 <div class="status"><button class="profileIcon"><img src="../Assets/Icons/AdminIcon.png" alt=""
                             style="height: 100%;"></button>
-                    Admin Name
+                    <?= $row['Name']; ?>
                 </div>
             </div>
             <div class="container">

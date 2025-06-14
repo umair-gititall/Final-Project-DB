@@ -6,6 +6,36 @@ if (!isset($_SESSION['Admin_Token'])) {
     exit();
 }
 $adminID = $_SESSION['Admin_ID'];
+
+$servername = "5.5.5.5";
+$username = "abdullah";
+$password = "abdullah";
+$database = "LostFoundDB";
+$port = 3306;
+                
+$conn = new mysqli($servername, $username, $password, $database, $port);
+
+
+if (isset($_POST['approve'])){
+    $claimID = $_POST['claimID'];
+    $sql4 = "UPDATE Claim_Request SET Claim_Status = 'Approved', Admin_ID = $adminID WHERE ClaimID = $claimID AND ItemID NOT IN (SELECT ItemID FROM Claim_Request WHERE Claim_Status = 'Approved')";
+    mysqli_query($conn, $sql4);
+
+    $sql5 = "UPDATE Claim_Request SET Claim_Status = 'Disapproved', Admin_ID = $adminID WHERE ItemID IN (SELECT ItemID FROM Claim_Request WHERE Claim_Status = 'Approved') AND Claim_Status = 'Not Approved'";
+    mysqli_query($conn, $sql5);
+
+    header("Refresh: 0");
+    exit();
+}
+
+if (isset($_POST['reject'])){
+    $claimID = $_POST['claimID'];
+    $sql6 = "UPDATE Claim_Request SET Claim_Status = 'Disapproved', Admin_ID = $adminID WHERE ClaimID = $claimID";
+    mysqli_query($conn, $sql6);
+    
+    header("Refresh: 0");
+    exit();
+}
 ?>
 
 <html lang="en">
@@ -69,25 +99,17 @@ $adminID = $_SESSION['Admin_ID'];
             <span class="header">
                 <h1>Admin Panel</h1>
             </span>
-            <?php
-                $servername = "5.5.5.5";
-                $username = "abdullah";
-                $password = "abdullah";
-                $database = "LostFoundDB";
-                $port = 3306;
-                
-                $conn = new mysqli($servername, $username, $password, $database, $port);
-
-                $sql10 = "Select Name from Admin where Admin_ID = '$adminID'";
-                $query_run10 = $conn->query($sql10);
-                if ($query_run10) {
-                    $row = $query_run10->fetch_assoc(); 
+            <?php                
+                $sql0 = "Select Name from Admin where Admin_ID = '$adminID'";
+                $query_run0 = $conn->query($sql0);
+                if ($query_run0) {
+                    $row = $query_run0->fetch_assoc(); 
                 }
             ?>
             <div class="profileDiv">
                 <div class="status"><button class="profileIcon"><img src="../Assets/Icons/AdminIcon.png" alt=""
                             style="height: 100%;"></button>
-                            <?= $row['Name']; ?>
+                    <?= $row['Name']; ?>
                 </div>
             </div>
             <div class="container">
@@ -100,28 +122,88 @@ $adminID = $_SESSION['Admin_ID'];
                 <div id="DataBox">
                     <div class="dataWrapper">
                         <div id="Loader">Loading...</div>
-                        <div id="Data">
-                            <div class="dataValues"></div>
-                            <div class="dataValues"></div>
-                            <div class="dataValues"></div>
-                            <button id="Button">Fetch</button>
-                        </div>
+
+                        <?php
+                        $sql1 = "SELECT * FROM Claim_Request WHERE Claim_Status = 'Not Approved'";
+                        $query_run1 = mysqli_query($conn, $sql1);
+                        
+                        if (mysqli_num_rows($query_run1) > 0) {
+                            foreach($query_run1 as $row)
+                            {
+                                $searchitem = $row['ItemID'];
+                                $searchuser = $row['UserID'];
+
+                                $sql2 = "SELECT ItemName FROM Item WHERE ItemID = '$searchitem'";
+                                $query_run2 = mysqli_query($conn, $sql2)->fetch_assoc();
+                                
+                                $sql3 = "SELECT * FROM User WHERE UserID = '$searchuser'";
+                                $query_run3 = mysqli_query($conn, $sql3)->fetch_assoc();
+                                
+                                ?>
+                                 <div id="Data">
+                                     <div class="dataValues">
+                                        <?= $query_run2['ItemName'] ?>
+                                    </div>
+                                    <div class="dataValues">
+                                        <?= $query_run3['PhoneNo'] ?>
+                                    </div>
+                                    <div class="dataValues">
+                                        <?= $query_run3['Email'] ?>
+                                    </div>
+                                    <?php $popupId = uniqid('popup_'); ?>
+                                        <button class="apply-btn" data-popup-id="<?= $popupId ?>">Fetch</button>
+                                 </div>
+
+                                 <div class="ApplyPopUp" id="<?= $popupId ?>" style="display: none;">
+                                    <div class="close">
+                                        <button class="Cross"><img src="../Assets/Icons/Cross.svg" alt="" id="BackIcon"></button>
+                                    </div>
+                                    <div class="verificationInfo">
+                                        <div class="Photo" id="Photo" style="border: 2px solid black;">
+                                        <?php
+                                        $sql7 = "SELECT * FROM ClaimPhoto Where ClaimID = ".$row['ClaimID'];
+                                        $query_run4 = mysqli_query($conn, $sql7);
+
+                                        $i=0;
+                                        foreach($query_run4 as $claimphoto)
+                                        {
+                                            if($i == 0){
+                                        ?>
+                                        <div class="mySlides active">
+                                                <img src="<?=$claimphoto['Path']?>" alt="Slide <?=$i+1?>">
+                                            </div>
+                                        <?php
+                                        }
+                                        else{
+                                        ?>
+                                            <div class="mySlides">
+                                            <img src="<?=$claimphoto['Path']?>" alt="Slide <?=$i+1?>">
+                                            </div>
+                                        <?php
+                                        }
+                                        $i++;
+                                    }
+                                        ?>
+                                            <!-- Navigation buttons -->
+                                            <a class="prev" onclick="changeSlide(-1)">&#10094;</a>
+                                            <a class="next" onclick="changeSlide(1)">&#10095;</a>
+
+                                        </div>
+                                        <textarea name="Answer" id="Answer"><?= $row['Answer'] ?></textarea>
+
+                                        <form method="post" class="action-buttons">
+                                            <input type="hidden" name="claimID" value="<?= $row['ClaimID'] ?>">
+                                            <button type="submit" name="approve" class="approve-btn">&nbsp<i class="fa-solid fa-check"></i></button>
+                                            <button type="submit" name="reject" class="reject-btn">&nbsp<i class="fa-solid fa-xmark"></i></button>
+                                        </form>
+                                    </div>
+                                </div>
+                        <?php
+                            }
+                        }
+                    ?>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
-    <div id="ApplyPopUp" style="display: none;">
-        <div class="close">
-            <button id="Cross"><img src="../Assets/Icons/Cross.svg" alt="" id="BackIcon"></button>
-        </div>
-        <div class="verificationInfo">
-            <div id="Photo" style="border: 2px solid black;"></div>
-            <textarea name="Answer" id="Answer">Answer Here</textarea>
-
-            <div class="action-buttons">
-                <button class="approve-btn">&nbsp<i class="fa-solid fa-check"></i></button>
-                <button class="reject-btn">&nbsp<i class="fa-solid fa-xmark"></i></button>
             </div>
         </div>
     </div>

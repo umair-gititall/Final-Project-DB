@@ -319,7 +319,7 @@
     border-radius: 19px;
     background-color: pink;
     box-shadow: 10px 10px;
-    overflow: hidden;
+    overflow-x: hidden;
     resize: none;
     scrollbar-width: none;
     -ms-overflow-style: none;
@@ -400,7 +400,7 @@
     display: none;
 }
 
-#Button {
+.apply-btn {
     width: 95%;
     padding: 10px;
     margin: 15px;
@@ -533,7 +533,7 @@
     margin: 15px -10px;
 }
 
-#Cross{
+.Cross{
     border: none;
     background-color: transparent;
     z-index: 2;
@@ -552,8 +552,63 @@
     height: 50%;
     width: 90%;
     border-radius: 50px;
+    overflow: hidden;
 }
 
+/*  */
+.Photo {
+    max-width: 600px;
+    position: relative;
+    margin: 50px auto;
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+.mySlides {
+    position: absolute;
+    width: 100%;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
+
+.mySlides img {
+    width: 100%;
+    display: block;
+}
+
+.mySlides.active {
+    opacity: 1;
+    position: relative;
+}
+
+/* Navigation buttons */
+.prev,
+.next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    padding: 16px;
+    margin-top: -22px;
+    color: white;
+    font-weight: bold;
+    font-size: 24px;
+    transition: background-color 0.3s;
+    border-radius: 0 3px 3px 0;
+    user-select: none;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.next {
+    right: 0;
+    border-radius: 3px 0 0 3px;
+}
+
+.prev:hover,
+.next:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+/*  */
 
 #Answer
 {

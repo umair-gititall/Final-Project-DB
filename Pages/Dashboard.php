@@ -50,7 +50,7 @@
                     </a>
                 </li>
                 <li class="sidebarValues">
-                    <a href="#" class="ValuesLink">
+                    <a href="History.php" class="ValuesLink">
                         <span class="icon"><i class="fa fa-history"></i></span>
                         <span class="text">History</span>
                     </a>

@@ -5,6 +5,7 @@ if (!isset($_SESSION['Admin_Token'])) {
     header("Location: AdminLogin.html");
     exit();
 }
+$adminID = $_SESSION['Admin_ID'];
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
@@ -66,7 +67,7 @@ if ($conn->connect_error) {
                     </a>
                 </li>
                 <li class="sidebarValues">
-                    <a href="#" class="ValuesLink">
+                    <a href="History.php" class="ValuesLink">
                         <span class="icon"><i class="fa fa-history"></i></span>
                         <span class="text">History</span>
                     </a>
@@ -83,9 +84,19 @@ if ($conn->connect_error) {
             <span class="header">
                 <h1>Admin Panel</h1>
             </span>
-            <span id="Icon">
-                <i class="fa fa-user" style="transform: scale(1.7);"></i>
-            </span>
+            <?php
+                $sql10 = "Select Name from Admin where Admin_ID = '$adminID'";
+                $query_run10 = $conn->query($sql10);
+                if ($query_run10) {
+                    $row =  $query_run10->fetch_assoc    (); 
+                }
+            ?>
+            <div class="profileDiv">
+                <div class="status"><button class="profileIcon"><img src="../Assets/Icons/AdminIcon.png" alt=""
+                            style="height: 100%;"></button>
+                            <?= $row['Name']; ?>
+                </div>
+            </div>
             <div class="box">
                 <div class="boxHeader">
                     <h1>Add Admin</h1>
