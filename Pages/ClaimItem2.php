@@ -64,9 +64,9 @@
                     $imgSql = "INSERT INTO ClaimPhoto (ClaimID, Path, Description) VALUES ('$claimid', '$targetPath', '$newFileName')";
                     $imgStmt = $conn->query($imgSql);
                 }
-                echo "Claim Request submitted successfully!";
             }
         }
+        echo "Claim Request submitted successfully!";
         }
         else {
             echo "Failed to submit report.";
