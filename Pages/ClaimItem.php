@@ -57,7 +57,8 @@
                         <?php $popupId = uniqid('popup_'); ?>
                         <button class="apply-btn" data-popup-id="<?= $popupId ?>">Apply</button>
                     </div>
-                    <form id="AnswerForm" method="post" action="" enctype="multipart/form-data">
+                    <?php $formId = uniqid('AnswerForm_'); ?>
+                    <form id="<?= $formId ?>" method="post" action="" enctype="multipart/form-data">
                         <div class="ApplyPopUp" id="<?= $popupId ?>" style="display: none;">
                             <div class="close">
                                 <button type="button" class="Cross"><img src="../Assets/Icons/Cross.svg" alt=""
@@ -96,15 +97,16 @@
                                         </div>
                                 <input type="hidden" name="ItemID" value="<?= $row['ItemID'] ?>">
                                 <input name="Answer" id="Answer"
-                                    placeholder="<?= $row['Verification_Question']; ?>"></input>
+                                    placeholder="<?= $row['Verification_Question']; ?>" required></input>
                                 <div id="userData">
-                                    <input name="Name" class="userField" placeholder="Name">
-                                    <input name="Email" class="userField" placeholder="Email">
-                                    <input name="PhoneNo" class="userField" placeholder="Phone No.">
+                                    <input name="Name" class="userField" placeholder="Name" required>
+                                    <input name="Email" class="userField" placeholder="Email" required>
+                                    <input name="PhoneNo" class="userField" placeholder="Phone No." required>
                                 </div>
                             </div>
                             <div class="images">
-                                <div id="ImagesPreview">
+                                <?php $previewid = uniqid('previewid_'); ?>
+                                <div class="ImagesPreview" id=<?= $previewid ?> >
                                     <i>Click here to add files~ 💕</i>
                                 </div>
                                 <input name="files[]" type="file" id="ImagesInput" multiple
