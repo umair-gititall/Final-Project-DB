@@ -6,6 +6,20 @@ if (!isset($_SESSION['Admin_Token'])) {
     exit();
 }
 $adminID = $_SESSION['Admin_ID'];
+
+$servername = "5.5.5.5";
+$username = "abdullah";
+$password = "abdullah";
+$database = "LostFoundDB";
+$port = 3306;
+
+$conn = new mysqli($servername, $username, $password, $database, $port);
+
+$sql10 = "Select Name from Admin where Admin_ID = '$adminID'";
+$query_run10 = $conn->query($sql10);
+if ($query_run10) {
+    $row = $query_run10->fetch_assoc(); 
+}
 ?>
 
 <html lang="en">
@@ -69,21 +83,6 @@ $adminID = $_SESSION['Admin_ID'];
             <span class="header">
                 <h1>Admin Panel</h1>
             </span>
-            <?php
-                $servername = "5.5.5.5";
-                $username = "abdullah";
-                $password = "abdullah";
-                $database = "LostFoundDB";
-                $port = 3306;
-                
-                $conn = new mysqli($servername, $username, $password, $database, $port);
-
-                $sql10 = "Select Name from Admin where Admin_ID = '$adminID'";
-                $query_run10 = $conn->query($sql10);
-                if ($query_run10) {
-                    $row = $query_run10->fetch_assoc(); 
-                }
-            ?>
             <div class="profileDiv">
                 <div class="status"><button class="profileIcon"><img src="../Assets/Icons/AdminIcon.png" alt=""
                             style="height: 100%;"></button>
@@ -100,12 +99,29 @@ $adminID = $_SESSION['Admin_ID'];
                 <div id="DataBox">
                     <div class="dataWrapper">
                         <div id="Loader">Loading...</div>
+                         <?php
+                        $sql1 = "SELECT * FROM Claim_Request WHERE Claim_Status = 'Approved'";
+                        $query_run1 = mysqli_query($conn, $sql1);
+                        
+                        if (mysqli_num_rows($query_run1) > 0) {
+                            foreach($query_run1 as $row)
+                            {
+                                $sql2 = "SELECT * FROM User WHERE UserID = ".$row['UserID'];
+                                $query_run2 = mysqli_query($conn, $sql2)->fetch_assoc();
+
+                                $sql3 = "SELECT * FROM Item WHERE ItemID = ".$row['ItemID'];
+                                $query_run3 = mysqli_query($conn, $sql3)->fetch_assoc();
+                        ?>
                         <div id="Data">
-                            <div class="dataValues">Hello</div>
-                            <div class="dataValues">Hello</div>
-                            <div class="dataValues">Hello</div>
-                            <div class="dataValues">Hello</div>
+                            <div class="dataValues"><?=$query_run3['ItemName']?></div>
+                            <div class="dataValues"><?=$query_run2['UserName']?></div>
+                            <div class="dataValues"><?=$query_run2['PhoneNo']?></div>
+                            <div class="dataValues"><?=$row['Date_of_Claim']?></div>
                         </div>
+                        <?php
+                        }
+                    }
+                    ?>
                     </div>
                 </div>
             </div>

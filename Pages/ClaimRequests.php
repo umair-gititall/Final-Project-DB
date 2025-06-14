@@ -18,10 +18,10 @@ $conn = new mysqli($servername, $username, $password, $database, $port);
 
 if (isset($_POST['approve'])){
     $claimID = $_POST['claimID'];
-    $sql4 = "UPDATE Claim_Request SET Claim_Status = 'Approved', Admin_ID = $adminID WHERE ClaimID = $claimID AND ItemID NOT IN (SELECT ItemID FROM Claim_Request WHERE Claim_Status = 'Approved')";
+    $sql4 = "UPDATE Claim_Request SET Claim_Status = 'Approved', Admin_ID = $adminID, Date_of_Claim = SYSDATE() WHERE ClaimID = $claimID AND ItemID NOT IN (SELECT ItemID FROM Claim_Request WHERE Claim_Status = 'Approved')";
     mysqli_query($conn, $sql4);
 
-    $sql5 = "UPDATE Claim_Request SET Claim_Status = 'Disapproved', Admin_ID = $adminID WHERE ItemID IN (SELECT ItemID FROM Claim_Request WHERE Claim_Status = 'Approved') AND Claim_Status = 'Not Approved'";
+    $sql5 = "UPDATE Claim_Request SET Claim_Status = 'Disapproved', Admin_ID = $adminID, Date_of_Claim = SYSDATE() WHERE ItemID IN (SELECT ItemID FROM Claim_Request WHERE Claim_Status = 'Approved') AND Claim_Status = 'Not Approved'";
     mysqli_query($conn, $sql5);
 
     header("Refresh: 0");
@@ -30,7 +30,7 @@ if (isset($_POST['approve'])){
 
 if (isset($_POST['reject'])){
     $claimID = $_POST['claimID'];
-    $sql6 = "UPDATE Claim_Request SET Claim_Status = 'Disapproved', Admin_ID = $adminID WHERE ClaimID = $claimID";
+    $sql6 = "UPDATE Claim_Request SET Claim_Status = 'Disapproved', Admin_ID = $adminID, Date_of_Claim = SYSDATE() WHERE ClaimID = $claimID";
     mysqli_query($conn, $sql6);
     
     header("Refresh: 0");
@@ -151,7 +151,7 @@ if (isset($_POST['reject'])){
                                         <?= $query_run3['Email'] ?>
                                     </div>
                                     <?php $popupId = uniqid('popup_'); ?>
-                                        <button class="apply-btn" data-popup-id="<?= $popupId ?>">Fetch</button>
+                                        <button class="apply-btn" data-popup-id="<?= $popupId ?>">Action</button>
                                  </div>
 
                                  <div class="ApplyPopUp" id="<?= $popupId ?>" style="display: none;">
