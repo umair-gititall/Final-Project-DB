@@ -7,6 +7,32 @@ if (!isset($_SESSION['Admin_Token'])) {
 }
 $adminID = $_SESSION['Admin_ID'];
 ?>
+<?php
+   $servername = "5.5.5.5";
+   $username = "abdullah";
+   $password = "abdullah";
+   $database = "LostFoundDB";
+   $port = 3306;
+            
+                
+    $conn = new mysqli($servername, $username, $password, $database, $port);
+
+    $sql10 = "Select Name from Admin where Admin_ID = '$adminID'";
+    $query_run10 = $conn->query($sql10);
+    if ($query_run10) {
+        $row = $query_run10->fetch_assoc(); 
+    }
+?>
+
+<?php
+    if(isset($_POST['Question']) && isset($_POST['ItemID']))
+    {
+        $itemID = $_POST['ItemID'];
+        $question = $_POST['Question'];
+        $sql5 = "UPDATE Item SET Verification_Question = '$question', Status = 'Fetched' WHERE ItemID = '$itemID'";
+        mysqli_query($conn, $sql5);
+    }
+?>
 
 <html lang="en">
 
@@ -69,21 +95,6 @@ $adminID = $_SESSION['Admin_ID'];
             <span class="header">
                 <h1>Admin Panel</h1>
             </span>
-            <?php
-                $servername = "5.5.5.5";
-                $username = "abdullah";
-                $password = "abdullah";
-                $database = "LostFoundDB";
-                $port = 3306;
-                
-                $conn = new mysqli($servername, $username, $password, $database, $port);
-
-                $sql10 = "Select Name from Admin where Admin_ID = '$adminID'";
-                $query_run10 = $conn->query($sql10);
-                if ($query_run10) {
-                    $row = $query_run10->fetch_assoc(); 
-                }
-            ?>
             <div class="profileDiv">
                 <div class="status"><button class="profileIcon"><img src="../Assets/Icons/AdminIcon.png" alt=""
                             style="height: 100%;"></button>
@@ -100,25 +111,81 @@ $adminID = $_SESSION['Admin_ID'];
                 <div id="DataBox">
                     <div class="dataWrapper">
                         <div id="Loader">Loading...</div>
-                        <div id="Data">
-                            <div class="dataValues"></div>
-                            <div class="dataValues"></div>
-                            <div class="dataValues"></div>
-                            <button id="Button">Fetch</button>
+                        <?php
+                            $sql1 = "SELECT * FROM Item AS i INNER JOIN Reporter AS r on r.ReporterID = i.ReporterID WHERE Status = 'Fetching'";
+                            $query_run1 = mysqli_query($conn, $sql1);
+                        
+                            if (mysqli_num_rows($query_run1) > 0) {
+                            while ($row = mysqli_fetch_assoc($query_run1))
+                            {
+                                $itemid = $row['ItemID'];
+                        ?>
+                        <div class="item-block">
+                            <div class="data-item" data-itemid="<?= $itemid ?>">
+                                <div class="dataValues">
+                                    <?= $row['ItemName'] ?>
+                                </div>
+                                <div class="dataValues">
+                                    <?= $row['PhoneNo'] ?>
+                                </div>
+                                <div class="dataValues">
+                                    <?= $row['Email'] ?>
+                                </div>
+                                <button type = "button" class="fetch-button" data-popupid="<?= $itemid ?>">Fetch</button>
+                            </div>
+
+                            <div class="apply-popup" data-popupid="<?= $itemid ?>" style="display: none;">
+                                <div class="close">
+                                    <button class="cross"><img src="../Assets/Icons/Cross.svg" alt=""
+                                            id="BackIcon"></button>
+                                </div>
+                                <form class="verificationInfo" action="" method="post">
+                                    <div class="Photo" id="Photo" style="border: 2px solid black;">
+                                        <?php
+                                $sql2 = "SELECT * FROM ItemPhoto Where ItemID = ".$row['ItemID'];
+                                $query_run2 = mysqli_query($conn, $sql2);
+
+                                $i=0;
+                                foreach($query_run2 as $itemphoto)
+                                {
+                                    if($i == 0){
+                                ?>
+                                        <div class="mySlides active">
+                                            <img src="<?=$itemphoto['Path']?>" alt="Slide <?=$i+1?>">
+                                        </div>
+                                        <?php
+                                }
+                                else{
+                                ?>
+                                        <div class="mySlides">
+                                            <img src="<?=$itemphoto['Path']?>" alt="Slide <?=$i+1?>">
+                                        </div>
+                                        <?php
+                                }
+                                $i++;
+                            }
+                                ?>
+                                        <!-- Navigation buttons -->
+                                        <a class="prev">&#10094;</a>
+                                        <a class="next">&#10095;</a>
+
+
+                                    </div>
+                                    <input type="hidden" name="ItemID" value="<?= $row['ItemID'] ?>">
+                                    <textarea name="Question" class="Answer"
+                                        placeholder="Q. Enter Your Question Here?"></textarea>
+                                    <button id="SubmitButton" style="width: 30%; margin: 25px;">Fetch</button>
+                                </form>
+                            </div>
                         </div>
+
+                        <?php
+                            }
+                        }
+                        ?>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-    <div id="ApplyPopUp" style="display: none;">
-        <div class="close">
-            <button id="Cross"><img src="../Assets/Icons/Cross.svg" alt="" id="BackIcon"></button>
-        </div>
-        <div class="verificationInfo">
-            <div id="Photo" style="border: 2px solid black;"></div>
-            <textarea name="Answer" id="Answer" placeholder="Q. Enter Your Question Here?"></textarea>
-            <button id="SubmitButton" style="width: 30%; margin: 25px;">Fetch</button>
         </div>
     </div>
     <script src="FetchItem.js"></script>
