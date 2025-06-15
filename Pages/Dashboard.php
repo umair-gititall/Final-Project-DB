@@ -38,7 +38,7 @@
                     </a>
                 </li>
                 <li class="sidebarValues">
-                    <a href="FetchItem.php" class="ValuesLink">
+                    <a href="FetchItems.php" class="ValuesLink">
                         <span class="icon"><i class="fa fa-box-open"></i></span>
                         <span class="text">Fetch Items</span>
                     </a>
@@ -69,8 +69,8 @@
             </span>
             <?php
                 $servername = "5.5.5.5";
-                $username = "abdullah";
-                $password = "abdullah";
+                $username = "LostFoundSystem";
+                $password = "LostFoundManagementSystem";
                 $database = "LostFoundDB";
                 $port = 3306;
                 

@@ -2,14 +2,14 @@
 
 session_start();
 
-if (!isset($_SESSION['last_run']) || time() - $_SESSION['last_run'] > 15) {
+if (!isset($_SESSION['last_run']) || time() - $_SESSION['last_run'] > 10) {
     $_SESSION['last_run'] = time();
 
 
 
 $host = "5.5.5.5";
-$user = "abdullah";
-$password = "abdullah";
+$user = "LostFoundSystem";
+$password = "LostFoundManagementSystem";
 $dbname = "LostFoundDB"; 
 
 $conn = new mysqli($host, $user, $password, $dbname);
@@ -309,5 +309,7 @@ if ($query_run) {
 }
 
 $conn->close();
-}
+} else
+    echo "Invalid Request Timeout";
+
 ?>

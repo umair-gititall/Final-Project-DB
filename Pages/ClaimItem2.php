@@ -1,7 +1,7 @@
 <?php
     $servername = "5.5.5.5";
-    $username = "abdullah";
-    $password = "abdullah";
+    $username = "LostFoundSystem";
+    $password = "LostFoundManagementSystem";
     $database = "LostFoundDB";
     $port = 3306;  
     $conn = new mysqli($servername, $username, $password, $database, $port);
@@ -29,12 +29,18 @@
 
             $userid = $row['UserID'];
 
-            $sql4 = "INSERT INTO Claim_Request (Date_of_Claim, Answer, UserID, ItemID) VALUES (CURDATE(), '$answer', '$userid', '$itemid')";
-            $conn->query($sql4);
+            $sql4 = "SELECT * FROM Claim_Request WHERE ItemID = '$itemid' AND Claim_Status = 'Approved'";
+            $query_run5 = $conn->query($sql4);
 
-            $sql5 = "SELECT ClaimID FROM Claim_Request ORDER BY ClaimID DESC LIMIT 1";
-            $query_run5 = $conn->query($sql5);
-            $row = $query_run5->fetch_assoc();
+            if($query_run5->num_rows != 0){
+                    die("Item is already Claimed");
+            }
+            $sql5 = "INSERT INTO Claim_Request (Date_of_Claim, Answer, UserID, ItemID) VALUES (CURDATE(), '$answer', '$userid', '$itemid')";
+            $conn->query($sql5);
+
+            $sql6 = "SELECT ClaimID FROM Claim_Request ORDER BY ClaimID DESC LIMIT 1";
+            $query_run6 = $conn->query($sql6);
+            $row = $query_run6->fetch_assoc();
 
             $claimid = $row['ClaimID'];
 

@@ -10,8 +10,8 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
 $servername = "5.5.5.5";
-$username = "abdullah";
-$password = "abdullah";
+$username = "LostFoundSystem";
+$password = "LostFoundManagementSystem";
 $database = "LostFoundDB";
 $port = 3306;
 
@@ -55,7 +55,7 @@ if ($conn->connect_error) {
                     </a>
                 </li>
                 <li class="sidebarValues">
-                    <a href="FetchItem.php" class="ValuesLink">
+                    <a href="FetchItems.php" class="ValuesLink">
                         <span class="icon"><i class="fa fa-box-open"></i></span>
                         <span class="text">Fetch Items</span>
                     </a>

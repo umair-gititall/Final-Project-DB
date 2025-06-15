@@ -8,8 +8,8 @@ if (!isset($_SESSION['Admin_Token'])) {
 $adminID = $_SESSION['Admin_ID'];
 
 $servername = "5.5.5.5";
-$username = "abdullah";
-$password = "abdullah";
+$username = "LostFoundSystem";
+$password = "LostFoundManagementSystem";
 $database = "LostFoundDB";
 $port = 3306;
                 
@@ -69,7 +69,7 @@ if (isset($_POST['reject'])){
                     </a>
                 </li>
                 <li class="sidebarValues">
-                    <a href="FetchItem.php" class="ValuesLink">
+                    <a href="FetchItems.php" class="ValuesLink">
                         <span class="icon"><i class="fa fa-box-open"></i></span>
                         <span class="text">Fetch Items</span>
                     </a>

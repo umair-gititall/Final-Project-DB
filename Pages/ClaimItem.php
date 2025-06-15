@@ -1,7 +1,7 @@
 <?php
     $servername = "5.5.5.5";
-    $username = "abdullah";
-    $password = "abdullah";
+    $username = "LostFoundSystem";
+    $password = "LostFoundManagementSystem";
     $database = "LostFoundDB";
     $port = 3306;
                 
@@ -37,7 +37,7 @@
                 <div class="dataWrapper">
                     <div id="Loader">Loading...</div>
                     <?php
-                        $sql1 = "SELECT * FROM Item WHERE ItemID Not IN(SELECT ItemID FROM Claim_Request WHERE Claim_Status = 'Approved' AND 'Disapproved' ) AND Status = 'Fetched'";
+                        $sql1 = "SELECT * FROM Item WHERE ItemID Not IN(SELECT ItemID FROM Claim_Request WHERE Claim_Status = 'Approved') AND Status = 'Fetched'";
                         $query_run1 = mysqli_query($conn, $sql1);
                         
                         if (mysqli_num_rows($query_run1) > 0) {
@@ -110,7 +110,7 @@
                                     <i>Click here to add files~ 💕</i>
                                 </div>
                                 <input name="files[]" type="file" id="ImagesInput" multiple
-                                    accept=".png,.jpg,.jpeg,.gif,.pdf,.doc,.docx,.mp4,.mov,.avi" hidden />
+                                    accept=".png,.jpg,.jpeg,.gif" hidden />
                                 <button type="submit" id="SubmitButton"
                                     style="width: 50%; margin: 25px;">Submit</button>
                             </div>

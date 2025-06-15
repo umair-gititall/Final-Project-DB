@@ -9,8 +9,8 @@ $adminID = $_SESSION['Admin_ID'];
 ?>
 <?php
    $servername = "5.5.5.5";
-   $username = "abdullah";
-   $password = "abdullah";
+   $username = "LostFoundSystem";
+   $password = "LostFoundManagementSystem";
    $database = "LostFoundDB";
    $port = 3306;
             
@@ -41,7 +41,7 @@ $adminID = $_SESSION['Admin_ID'];
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Claim Item</title>
     <link rel="Icon" href="../assets/Favicon.png" type="image/x-icon">
-    <link rel="stylesheet" href="FetchItem.css" media="(min-width: 769px)">
+    <link rel="stylesheet" href="FetchItems.css" media="(min-width: 769px)">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 
@@ -65,7 +65,7 @@ $adminID = $_SESSION['Admin_ID'];
                     </a>
                 </li>
                 <li class="sidebarValues">
-                    <a href="FetchItem.php" class="ValuesLink">
+                    <a href="FetchItems.php" class="ValuesLink">
                         <span class="icon"><i class="fa fa-box-open"></i></span>
                         <span class="text">Fetch Items</span>
                     </a>
@@ -188,7 +188,7 @@ $adminID = $_SESSION['Admin_ID'];
             </div>
         </div>
     </div>
-    <script src="FetchItem.js"></script>
+    <script src="FetchItems.js"></script>
     <script src="../Cursor.js"></script>
 </body>
 

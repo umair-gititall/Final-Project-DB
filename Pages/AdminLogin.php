@@ -1,8 +1,8 @@
 <?php
     session_start();
     $servername = "5.5.5.5";
-    $username = "abdullah";
-    $password = "abdullah";
+    $username = "LostFoundSystem";
+    $password = "LostFoundManagementSystem";
     $database = "LostFoundDB";
     $port = 3306;
                         
