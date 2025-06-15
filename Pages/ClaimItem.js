@@ -45,9 +45,9 @@ window.addEventListener("DOMContentLoaded", () => {
                 const fileBox = document.createElement("div");
                 fileBox.classList.add("file-box");
                 fileBox.innerHTML = `
-                    <img src="../Assets/Icons/${icon}" alt="${ext}" width="30">
+                    <img src="../Assets/Icons/upload.svg" alt="${ext}" width="20" height="20">
                     <span>${file.name}</span>
-                    <img src="../Assets/Icons/trash.png" class="remove-btn" data-filename="${file.name}" title="Remove" style="width:18px; margin-left:8px; cursor:pointer;">
+                    <img src="../Assets/Icons/Delete.svg" class="remove-btn" data-filename="${file.name}" title="Remove" style="width:18px; margin-left:8px; cursor:pointer;">
                 `;
                 previewBox.appendChild(fileBox);
             });
@@ -89,7 +89,7 @@ window.addEventListener("DOMContentLoaded", () => {
         });
 
         const uploadIcon = document.createElement("img");
-        uploadIcon.src = "../Assets/Icons/upload.png";
+        uploadIcon.src = "../Assets/Icons/upload.svg";
         uploadIcon.alt = "Upload";
         uploadIcon.id = "uploadIcon";
         uploadIcon.style = "width: 32px; cursor: pointer;";
