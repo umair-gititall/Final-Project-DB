@@ -14,6 +14,11 @@
         $email = $_POST['Email'];
         $phoneno= $_POST['PhoneNo'];
 
+        require_once '../../mailer.php';
+        $htmlcontent = file_get_contents('ClaimRequestEmail.html');
+        $result = sendMail($email, 'Claim Request Sent', $htmlcontent);
+
+        if($result === true){
         $sql_check = "SELECT UserID FROM User WHERE Email = '$email'";
         $result_check = $conn->query($sql_check);
 
@@ -77,5 +82,8 @@
         else {
             echo "Failed to submit report.";
         }
+    }else {
+        echo "Invalid Email Address.";
     }
+}
 ?>

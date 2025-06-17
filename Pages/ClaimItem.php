@@ -97,11 +97,11 @@
                                         </div>
                                 <input type="hidden" name="ItemID" value="<?= $row['ItemID'] ?>">
                                 <input name="Answer" id="Answer"
-                                    placeholder="<?= $row['Verification_Question']; ?>" required></input>
+                                    placeholder="<?= $row['Verification_Question']; ?>" autocomplete="off" required></input>
                                 <div id="userData">
-                                    <input name="Name" class="userField" placeholder="Name" required>
-                                    <input name="Email" class="userField" placeholder="Email" required>
-                                    <input name="PhoneNo" class="userField" placeholder="Phone No." required>
+                                    <input name="Name" class="userField" placeholder="Name" autocomplete="off" required>
+                                    <input name="Email" class="userField" placeholder="Email" autocomplete="off" required>
+                                    <input name="PhoneNo" class="userField" placeholder="Phone No." autocomplete="off" required>
                                 </div>
                             </div>
                             <div class="images">
