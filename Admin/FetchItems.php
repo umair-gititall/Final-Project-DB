@@ -25,12 +25,20 @@ $adminID = $_SESSION['Admin_ID'];
 ?>
 
 <?php
-    if(isset($_POST['Question']) && isset($_POST['ItemID']))
+    if(isset($_POST['Question']) && isset($_POST['ItemID']) && isset($_POST['ReporterName']) && isset($_POST['ReporterEmail']))
     {
         $itemID = $_POST['ItemID'];
         $question = $_POST['Question'];
         $sql5 = "UPDATE Item SET Verification_Question = '$question', Status = 'Fetched' WHERE ItemID = '$itemID'";
         mysqli_query($conn, $sql5);
+
+        require_once '../../mailer.php';
+        $name = $_POST['ReporterName'];
+        $reporterEmail = $_POST['ReporterEmail'];
+        $htmlcontent = file_get_contents('../Email/ItemFetched.html');
+        htmlcontent = str_replace('Thank you ', 'Thank you '.$name.' ', $htmlcontent);
+        $result = sendMail($reporterEmail, 'Item Fetched Successfully', $htmlcontent);
+
     }
 ?>
 
@@ -172,6 +180,8 @@ $adminID = $_SESSION['Admin_ID'];
 
                                     </div>
                                     <input type="hidden" name="ItemID" value="<?= $row['ItemID'] ?>">
+                                    <input type="hidden" name="ReporterName" value="<?= $row['ReporterName'] ?>">
+                                    <input type="hidden" name="ReporterEmail" value="<?= $row['Email'] ?>">
                                     <textarea name="Question" class="Answer"
                                         placeholder="Q. Enter Your Question Here?"></textarea>
                                     <button id="SubmitButton" style="width: 30%; margin: 25px;">Fetch</button>
