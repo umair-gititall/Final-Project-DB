@@ -28,7 +28,7 @@ $description = $_POST['description'];
 require_once '../../mailer.php';
 
 
-$htmlcontent = file_get_contents('ReportEmail.html');
+$htmlcontent = file_get_contents('../Email/ReportSubmitted.html');
 $result = sendMail($email, 'Item Reported Successfully', $htmlcontent);
 
 // Insert into main report table

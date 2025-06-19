@@ -15,7 +15,7 @@
         $phoneno= $_POST['PhoneNo'];
 
         require_once '../../mailer.php';
-        $htmlcontent = file_get_contents('ClaimRequestEmail.html');
+        $htmlcontent = file_get_contents('../Email/ClaimSubmitted.html');
         $result = sendMail($email, 'Claim Request Sent', $htmlcontent);
 
         if($result === true){
