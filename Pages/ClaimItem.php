@@ -15,7 +15,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Claim Item</title>
     <link rel="Icon" href="../assets/Favicon.png" type="image/x-icon">
-    <link rel="stylesheet" href="ClaimItem.css" media="(min-width: 769px)">
+    <link rel="stylesheet" href="ClaimItem.css"  >
 </head>
 
 <body>
@@ -61,7 +61,7 @@
                     <form id="<?= $formId ?>" method="post" action="" enctype="multipart/form-data">
                         <div class="ApplyPopUp" id="<?= $popupId ?>" style="display: none;">
                             <div class="close">
-                                <button type="button" class="Cross"><img src="../Assets/Icons/Cross.svg" alt=""
+                                <button type="button" class="Cross" style="    border: none; background-color: transparent; z-index: 2;"><img src="../Assets/Icons/Cross.svg" alt=""
                                         id="BackIcon"></button>
                             </div>
                             <div class="verificationInfo">

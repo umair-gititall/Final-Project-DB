@@ -275,11 +275,6 @@
     margin: 15px -10px;
 }
 
-#Cross{
-    border: none;
-    background-color: transparent;
-    z-index: 2;
-}
 
 .verificationInfo{
     height: 100%;

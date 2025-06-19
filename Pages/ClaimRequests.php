@@ -189,6 +189,12 @@ if (isset($_POST['reject'])){
                                             <a class="next" onclick="changeSlide(1)">&#10095;</a>
 
                                         </div>
+                                        <?php
+                                            $sql8 = "SELECT Verification_Question FROM Item Where ItemID = ". $row['ItemID'];
+                                            $query_run5 = mysqli_query($conn, $sql8)->fetch_assoc();
+
+                                        ?>
+                                        <?= $query_run5['Verification_Question'] ?>
                                         <textarea name="Answer" id="Answer"><?= $row['Answer'] ?></textarea>
 
                                         <form method="post" class="action-buttons">
