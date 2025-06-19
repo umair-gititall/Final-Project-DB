@@ -58,7 +58,7 @@
                         <button class="apply-btn" data-popup-id="<?= $popupId ?>">Apply</button>
                     </div>
                     <?php $formId = uniqid('AnswerForm_'); ?>
-                    <form id="<?= $formId ?>" method="post" action="" enctype="multipart/form-data">
+                    <form id="<?= $formId ?>" method="post" action="ClaimItem2.php" enctype="multipart/form-data">
                         <div class="ApplyPopUp" id="<?= $popupId ?>" style="display: none;">
                             <div class="close">
                                 <button type="button" class="Cross" style="    border: none; background-color: transparent; z-index: 2;"><img src="../Assets/Icons/Cross.svg" alt=""
@@ -94,7 +94,7 @@
                                             <a class="prev" onclick="changeSlide(-1)">&#10094;</a>
                                             <a class="next" onclick="changeSlide(1)">&#10095;</a>
 
-                                        </div>
+                                        </div>  
                                 <input type="hidden" name="ItemID" value="<?= $row['ItemID'] ?>">
                                 <input name="Answer" id="Answer"
                                     placeholder="<?= $row['Verification_Question']; ?>" autocomplete="off" required></input>

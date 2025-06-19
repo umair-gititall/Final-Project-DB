@@ -14,8 +14,14 @@
         $email = $_POST['Email'];
         $phoneno= $_POST['PhoneNo'];
 
+        $sql7 = "SELECT ItemName FROM Item WHERE ItemID = ".$itemid;
+        $query_run7 = ($conn->query($sql7))->fetch_assoc();
+
         require_once '../../mailer.php';
         $htmlcontent = file_get_contents('../Email/ClaimSubmitted.html');
+        $htmlcontent = str_replace('[Item Name Will Appear Here]', $query_run7['ItemName'], $htmlcontent);
+        $htmlcontent = str_replace('Thank you ', 'Thank you '.$name.' ', $htmlcontent);
+        
         $result = sendMail($email, 'Claim Request Sent', $htmlcontent);
 
         if($result === true){
