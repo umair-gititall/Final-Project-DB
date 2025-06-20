@@ -22,20 +22,25 @@ if (isset($_POST['approve'])){
     $email = $_POST['Email'];
     $itemname = $_POST['ItemName'];
 
+    $sanitized_email = filter_var($email, FILTER_SANITIZE_EMAIL);
+
+if (filter_var($sanitized_email, FILTER_VALIDATE_EMAIL)) {
     require_once '../../mailer.php';
     $htmlcontent = file_get_contents('../Email/ClaimApproved.html');
     $htmlcontent = str_replace('[Item Name Will Appear Here]', $itemname, $htmlcontent);
     $result = sendMail($email, 'Claim Request Rejected', $htmlcontent);
-
-
+    
+    
     $sql4 = "UPDATE Claim_Request SET Claim_Status = 'Approved', Admin_ID = $adminID, Date_of_Claim = SYSDATE() WHERE ClaimID = $claimID AND ItemID NOT IN (SELECT ItemID FROM Claim_Request WHERE Claim_Status = 'Approved')";
     mysqli_query($conn, $sql4);
-
+    
     $sql5 = "UPDATE Claim_Request SET Claim_Status = 'Disapproved', Admin_ID = $adminID, Date_of_Claim = SYSDATE() WHERE ItemID IN (SELECT ItemID FROM Claim_Request WHERE Claim_Status = 'Approved') AND Claim_Status = 'Not Approved'";
     mysqli_query($conn, $sql5);
+    
 
     header("Refresh: 0");
     exit();
+}
 }
 
 if (isset($_POST['reject'])){
@@ -43,17 +48,20 @@ if (isset($_POST['reject'])){
     $email = $_POST['Email'];
     $itemname = $_POST['ItemName'];
 
+    $sanitized_email = filter_var($email, FILTER_SANITIZE_EMAIL);
+
+if (filter_var($sanitized_email, FILTER_VALIDATE_EMAIL)) {
     require_once '../../mailer.php';
     $htmlcontent = file_get_contents('../Email/ClaimRejected.html');
     $htmlcontent = str_replace('[Item Name Will Appear Here]', $itemname, $htmlcontent);
-    $result = sendMail($email, 'Claim Request Rejected', $htmlcontent);
-
+    sendMail($email, 'Claim Request Rejected', $htmlcontent);
 
     $sql6 = "UPDATE Claim_Request SET Claim_Status = 'Disapproved', Admin_ID = $adminID, Date_of_Claim = SYSDATE() WHERE ClaimID = $claimID";
     mysqli_query($conn, $sql6);
     
     header("Refresh: 0");
     exit();
+}
 }
 ?>
 

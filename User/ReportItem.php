@@ -1,12 +1,4 @@
 <?php
-
-session_start();
-
-if (!isset($_SESSION['last_run']) || time() - $_SESSION['last_run'] > 10) {
-    $_SESSION['last_run'] = time();
-
-
-
 $host = "5.5.5.5";
 $user = "LostFoundSystem";
 $password = "LostFoundManagementSystem";
@@ -25,15 +17,13 @@ $date = $_POST['date'];
 $location = $_POST['location'];
 $description = $_POST['description'];
 
+$sanitized_email = filter_var($email, FILTER_SANITIZE_EMAIL);
+
+if (filter_var($sanitized_email, FILTER_VALIDATE_EMAIL)) {
 require_once '../../mailer.php';
-
-
 $htmlcontent = file_get_contents('../Email/ReportSubmitted.html');
 $result = sendMail($email, 'Item Reported Successfully', $htmlcontent);
 
-// Insert into main report table
-
-if($result === true){
 $sql_check = "SELECT ReporterID FROM Reporter WHERE Email = '$email'";
 $result_check = $conn->query($sql_check);
 
@@ -103,7 +93,5 @@ if ($query_run) {
 }
 
 $conn->close();
-} else
-    echo "Invalid Request Timeout";
 
 ?>
