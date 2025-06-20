@@ -17,6 +17,9 @@
         $sql7 = "SELECT ItemName FROM Item WHERE ItemID = ".$itemid;
         $query_run7 = ($conn->query($sql7))->fetch_assoc();
 
+        $sanitized_email = filter_var($email, FILTER_SANITIZE_EMAIL);
+
+if (filter_var($sanitized_email, FILTER_VALIDATE_EMAIL)) {
         require_once '../../mailer.php';
         $htmlcontent = file_get_contents('../Email/ClaimSubmitted.html');
         $htmlcontent = str_replace('[Item Name Will Appear Here]', $query_run7['ItemName'], $htmlcontent);
@@ -24,7 +27,6 @@
         
         $result = sendMail($email, 'Claim Request Sent', $htmlcontent);
 
-        if($result === true){
         $sql_check = "SELECT UserID FROM User WHERE Email = '$email'";
         $result_check = $conn->query($sql_check);
 

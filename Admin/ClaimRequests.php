@@ -18,23 +18,50 @@ $conn = new mysqli($servername, $username, $password, $database, $port);
 
 if (isset($_POST['approve'])){
     $claimID = $_POST['claimID'];
+
+    $email = $_POST['Email'];
+    $itemname = $_POST['ItemName'];
+
+    $sanitized_email = filter_var($email, FILTER_SANITIZE_EMAIL);
+
+if (filter_var($sanitized_email, FILTER_VALIDATE_EMAIL)) {
+    require_once '../../mailer.php';
+    $htmlcontent = file_get_contents('../Email/ClaimApproved.html');
+    $htmlcontent = str_replace('[Item Name Will Appear Here]', $itemname, $htmlcontent);
+    $result = sendMail($email, 'Claim Request Rejected', $htmlcontent);
+    
+    
     $sql4 = "UPDATE Claim_Request SET Claim_Status = 'Approved', Admin_ID = $adminID, Date_of_Claim = SYSDATE() WHERE ClaimID = $claimID AND ItemID NOT IN (SELECT ItemID FROM Claim_Request WHERE Claim_Status = 'Approved')";
     mysqli_query($conn, $sql4);
-
+    
     $sql5 = "UPDATE Claim_Request SET Claim_Status = 'Disapproved', Admin_ID = $adminID, Date_of_Claim = SYSDATE() WHERE ItemID IN (SELECT ItemID FROM Claim_Request WHERE Claim_Status = 'Approved') AND Claim_Status = 'Not Approved'";
     mysqli_query($conn, $sql5);
+    
 
     header("Refresh: 0");
     exit();
 }
+}
 
 if (isset($_POST['reject'])){
     $claimID = $_POST['claimID'];
+    $email = $_POST['Email'];
+    $itemname = $_POST['ItemName'];
+
+    $sanitized_email = filter_var($email, FILTER_SANITIZE_EMAIL);
+
+if (filter_var($sanitized_email, FILTER_VALIDATE_EMAIL)) {
+    require_once '../../mailer.php';
+    $htmlcontent = file_get_contents('../Email/ClaimRejected.html');
+    $htmlcontent = str_replace('[Item Name Will Appear Here]', $itemname, $htmlcontent);
+    sendMail($email, 'Claim Request Rejected', $htmlcontent);
+
     $sql6 = "UPDATE Claim_Request SET Claim_Status = 'Disapproved', Admin_ID = $adminID, Date_of_Claim = SYSDATE() WHERE ClaimID = $claimID";
     mysqli_query($conn, $sql6);
     
     header("Refresh: 0");
     exit();
+}
 }
 ?>
 
@@ -190,7 +217,7 @@ if (isset($_POST['reject'])){
 
                                         </div>
                                         <?php
-                                            $sql8 = "SELECT Verification_Question FROM Item Where ItemID = ". $row['ItemID'];
+                                            $sql8 = "SELECT * FROM Item Where ItemID = ". $row['ItemID'];
                                             $query_run5 = mysqli_query($conn, $sql8)->fetch_assoc();
 
                                         ?>
@@ -199,6 +226,8 @@ if (isset($_POST['reject'])){
 
                                         <form method="post" class="action-buttons">
                                             <input type="hidden" name="claimID" value="<?= $row['ClaimID'] ?>">
+                                            <input type="hidden" name="Email" value="<?= $query_run3['Email'] ?>">
+                                            <input type="hidden" name="ItemName" value="<?= $query_run5['ItemName'] ?>">
                                             <button type="submit" name="approve" class="approve-btn">&nbsp<i class="fa-solid fa-check"></i></button>
                                             <button type="submit" name="reject" class="reject-btn">&nbsp<i class="fa-solid fa-xmark"></i></button>
                                         </form>
