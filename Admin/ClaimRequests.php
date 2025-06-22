@@ -28,7 +28,7 @@ if (filter_var($sanitized_email, FILTER_VALIDATE_EMAIL)) {
     require_once '../../mailer.php';
     $htmlcontent = file_get_contents('../Email/ClaimApproved.html');
     $htmlcontent = str_replace('[Item Name Will Appear Here]', $itemname, $htmlcontent);
-    $result = sendMail($email, 'Claim Request Rejected', $htmlcontent);
+    $result = sendMail($email, 'Claim Request Approved', $htmlcontent);
     
     
     $sql4 = "UPDATE Claim_Request SET Claim_Status = 'Approved', Admin_ID = $adminID, Date_of_Claim = SYSDATE() WHERE ClaimID = $claimID AND ItemID NOT IN (SELECT ItemID FROM Claim_Request WHERE Claim_Status = 'Approved')";
