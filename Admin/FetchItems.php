@@ -36,7 +36,7 @@ $adminID = $_SESSION['Admin_ID'];
         $name = $_POST['ReporterName'];
         $reporterEmail = $_POST['ReporterEmail'];
         $htmlcontent = file_get_contents('../Email/ItemFetched.html');
-        htmlcontent = str_replace('Thank you ', 'Thank you '.$name.' ', $htmlcontent);
+        $htmlcontent = str_replace('Thank you ', 'Thank you '.$name.' ', $htmlcontent);
         $result = sendMail($reporterEmail, 'Item Fetched Successfully', $htmlcontent);
 
     }
