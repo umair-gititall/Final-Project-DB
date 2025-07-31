@@ -20,7 +20,7 @@
         $sanitized_email = filter_var($email, FILTER_SANITIZE_EMAIL);
 
 if (filter_var($sanitized_email, FILTER_VALIDATE_EMAIL)) {
-        require_once '../../mailer.php';
+        require_once '../../Requirements/LFMS/mailer.php';
         $htmlcontent = file_get_contents('../Email/ClaimSubmitted.html');
         $htmlcontent = str_replace('[Item Name Will Appear Here]', $query_run7['ItemName'], $htmlcontent);
         $htmlcontent = str_replace('Thank you ', 'Thank you '.$name.' ', $htmlcontent);

@@ -25,7 +25,7 @@ if (isset($_POST['approve'])){
     $sanitized_email = filter_var($email, FILTER_SANITIZE_EMAIL);
 
 if (filter_var($sanitized_email, FILTER_VALIDATE_EMAIL)) {
-    require_once '../../mailer.php';
+    require_once '../../Requirements/LFMS/mailer.php';
     $htmlcontent = file_get_contents('../Email/ClaimApproved.html');
     $htmlcontent = str_replace('[Item Name Will Appear Here]', $itemname, $htmlcontent);
     $result = sendMail($email, 'Claim Request Approved', $htmlcontent);
@@ -51,7 +51,7 @@ if (isset($_POST['reject'])){
     $sanitized_email = filter_var($email, FILTER_SANITIZE_EMAIL);
 
 if (filter_var($sanitized_email, FILTER_VALIDATE_EMAIL)) {
-    require_once '../../mailer.php';
+    require_once '../../Requirements/LFMS/mailer.php';
     $htmlcontent = file_get_contents('../Email/ClaimRejected.html');
     $htmlcontent = str_replace('[Item Name Will Appear Here]', $itemname, $htmlcontent);
     sendMail($email, 'Claim Request Rejected', $htmlcontent);

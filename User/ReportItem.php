@@ -20,7 +20,7 @@ $description = $_POST['description'];
 $sanitized_email = filter_var($email, FILTER_SANITIZE_EMAIL);
 
 if (filter_var($sanitized_email, FILTER_VALIDATE_EMAIL)) {
-require_once '../../mailer.php';
+require_once '../../Requirements/LFMS/mailer.php';
 $htmlcontent = file_get_contents('../Email/ReportSubmitted.html');
 $result = sendMail($email, 'Item Reported Successfully', $htmlcontent);
 

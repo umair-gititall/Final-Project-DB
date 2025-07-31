@@ -32,7 +32,7 @@ $adminID = $_SESSION['Admin_ID'];
         $sql5 = "UPDATE Item SET Verification_Question = '$question', Status = 'Fetched' WHERE ItemID = '$itemID'";
         mysqli_query($conn, $sql5);
 
-        require_once '../../mailer.php';
+        require_once '../../Requirements/LFMS/mailer.php';
         $name = $_POST['ReporterName'];
         $reporterEmail = $_POST['ReporterEmail'];
         $htmlcontent = file_get_contents('../Email/ItemFetched.html');
