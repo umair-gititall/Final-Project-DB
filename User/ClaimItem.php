@@ -1,9 +1,9 @@
 <?php
-    $servername = "5.5.5.5";
+    $servername = "swift-sheep-89.telebit.io";
     $username = "LostFoundSystem";
     $password = "LostFoundManagementSystem";
     $database = "LostFoundDB";
-    $port = 3306;
+    $port = 48241;
                 
     $conn = new mysqli($servername, $username, $password, $database, $port);
 ?>
