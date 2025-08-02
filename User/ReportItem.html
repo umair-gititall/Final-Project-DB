@@ -22,12 +22,21 @@
                 <div id="loader">Loading</div>
                 <div class="upperbox">
                     <div class="fields">
-                        <input name="name" type="text" placeholder="Name" id="input" required autocomplete="off"><br>
-                        <input name="email" type="email" placeholder="Email" id="input" required autocomplete="off"><br>
-                        <input name="phone" type="text" placeholder="Phone" id="input" required autocomplete="off"><br>
-                        <input name="item" type="text" placeholder="Item" id="input" required autocomplete="off"><br>
-                        <input name="date" type="date" placeholder="Date" id="input" required><br>
-                        <input name="location" type="text" placeholder="Location" id="input" required
+                        <input name="name" type="text" placeholder="Name" class="input" required autocomplete="off"><br>
+                        <input name="email" type="email" placeholder="Email" class="input" required
+                            autocomplete="off"><br>
+                        <div class="input" id="phonebox">
+                            <select id="ListBox" name="ListBox" class="input">
+                                <option value="+92">+92</option>
+                                <option value="+91">+91</option>
+                                <option value="+1">+1</option>
+                            </select>
+                            <input name="phone" type="text" placeholder="[3/4]xxxxxxxxx" class="input" pattern="[3]{9}"
+                                id="phone" required autocomplete="off"><br>
+                        </div>
+                        <input name="item" type="text" placeholder="Item" class="input" required autocomplete="off"><br>
+                        <input name="date" type="date" placeholder="Date" class="input" id="date" required><br>
+                        <input name="location" type="text" placeholder="Location" class="input" required
                             autocomplete="off"><br>
                     </div>
                     <div class="images">

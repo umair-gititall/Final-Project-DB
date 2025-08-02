@@ -11,7 +11,8 @@ if ($conn->connect_error) {
 
 $name = $_POST['name'];
 $email = $_POST['email'];
-$phone = $_POST['phone'];
+$area = $_POST['ListBox'];
+$phone = $area . $_POST['phone'];
 $item = $_POST['item'];
 $date = $_POST['date'];
 $location = $_POST['location'];

@@ -1,35 +1,39 @@
 @keyframes headerAnimation {
-    to { background-position: 100% }
+    to {
+        background-position: 100%
+    }
 }
+
 @keyframes start {
-    from{
+    from {
         transform: translate(0px, -50px);
     }
-    to{
+
+    to {
         transform: translate(0px, 0px);
     }
 }
 
 @keyframes expand {
-    to{
+    to {
         height: 90%;
     }
 }
 
 @keyframes loaderAnimation {
-    to{
+    to {
         opacity: 0;
     }
 }
 
 @keyframes show {
-    to{
+    to {
         opacity: 1;
         transform: translate(0px, 0px);
-    }    
+    }
 }
 
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -42,7 +46,7 @@
     background-image: linear-gradient(to right, aquamarine, navajowhite, pink);
 }
 
-.back{
+.back {
     height: 30px;
     width: 50px;
     margin: 15px 10px;
@@ -52,12 +56,12 @@
     z-index: 2;
 }
 
-#BackIcon{
+#BackIcon {
     height: 100%;
     width: 80%;
 }
 
-.header{
+.header {
     height: 10%;
     width: 100%;
     position: relative;
@@ -68,14 +72,14 @@
     font: 900 clamp(0.5em, 2.5vw, 2.5em) exo, cursive;
     background: linear-gradient(90deg, rgb(234, 0, 255), aquamarine, rgb(234, 0, 255)) -100%/ 200%;
     -webkit-background-clip: text;
-	background-clip: text;
+    background-clip: text;
     color: transparent;
-    animation: 
-    headerAnimation 2s infinite ease-in-out,
-    start 2s linear forwards;
+    animation:
+        headerAnimation 2s infinite ease-in-out,
+        start 2s linear forwards;
 }
 
-.container{
+.container {
     height: 80%;
     width: 100%;
     display: flex;
@@ -94,7 +98,7 @@
     animation: expand 2s ease forwards 2s;
 }
 
-#loader{
+#loader {
     position: absolute;
     top: 42%;
     left: 47%;
@@ -105,7 +109,7 @@
     animation: loaderAnimation 2s ease forwards 2s;
 }
 
-.upperbox{
+.upperbox {
     height: 70%;
     width: 100%;
     display: flex;
@@ -115,7 +119,7 @@
     animation: show 3s ease forwards 3s;
 }
 
-.fields{
+.fields {
     height: 100%;
     width: 50%;
     display: flex;
@@ -127,19 +131,43 @@
     animation: show 3s ease forwards 3s;
 }
 
-#input {
+.input {
     font-family: cursive;
     font-size: large;
     color: grey;
     text-shadow: 1px 1px;
-    transform: translate(0px,10px);
+    /* transform: translate(0px, 10px); */
     background-color: transparent;
     border: none;
     outline: none;
     text-align: center;
 }
 
-.images{
+select {
+    appearance: none;
+    -webkit-appearance: none;
+    /* For Safari, Chrome, Opera */
+    -moz-appearance: none;
+    /* For Firefox */
+}
+
+#phonebox {
+    height: 28px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 0px;
+}
+
+#phone {
+    width: 24%;
+}
+
+#phone::placeholder {
+    font-size: medium;
+}
+
+.images {
     height: 100%;
     width: 50%;
     display: flex;
@@ -148,8 +176,7 @@
     align-items: center;
 }
 
-#ImagesPreview
-{
+#ImagesPreview {
     height: 75%;
     width: 90%;
     display: flex;
@@ -157,7 +184,7 @@
     align-items: center;
     background-color: pink;
     overflow: auto;
-    resize: vertical;  
+    resize: vertical;
     overflow: clip padding-box;
     scrollbar-width: none;
     -ms-overflow-style: none;
@@ -172,7 +199,7 @@
 }
 
 
-.lowerbox{
+.lowerbox {
     height: 30%;
     width: 100%;
     display: flex;
@@ -182,8 +209,7 @@
     animation: show 3s ease forwards 3s;
 }
 
-#Description
-{
+#Description {
     height: 80%;
     width: 80%;
     font-family: cursive;
@@ -193,12 +219,12 @@
     text-shadow: 1px 1px;
     resize: none;
     outline: none;
-    
+
     overflow: auto;
     overflow: clip padding-box;
     scrollbar-width: none;
     -ms-overflow-style: none;
-    
+
     border: 2px solid black;
     border-radius: 30px;
     background-color: pink;
@@ -209,7 +235,7 @@
     display: none;
 }
 
-#ReportContainer{
+#ReportContainer {
     height: 8%;
     width: 15%;
     transform: translate(0px, -20px);
