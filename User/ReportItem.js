@@ -56,7 +56,8 @@ form.addEventListener("submit", function (e) {
 
   const name = form.querySelector('input[placeholder="Name"]').value;
   const email = form.querySelector('input[placeholder="Email"]').value;
-  const phone = form.querySelector('input[placeholder="Phone"]').value;
+  const phone = form.querySelector('input[name="phone"]').value;
+  const ListBox = document.getElementById("ListBox").value;
   const item = form.querySelector('input[placeholder="Item"]').value;
   const date = form.querySelector('input[type="date"]').value;
   const location = form.querySelector('input[placeholder="Location"]').value;
@@ -66,6 +67,7 @@ form.addEventListener("submit", function (e) {
   formData.append("name", name);
   formData.append("email", email);
   formData.append("phone", phone);
+  formData.append("listbox", ListBox);
   formData.append("item", item);
   formData.append("date", date);
   formData.append("location", location);
@@ -128,7 +130,6 @@ today_min = yyyy - 1 + "-" + mm + "-" + dd;
 document.getElementById("date").setAttribute("max", today_max);
 document.getElementById("date").setAttribute("min", today_min);
 
-//ListBox
 const ListBox = document.getElementById("ListBox");
 const phoneInfo = document.getElementById("phone");
 
@@ -138,18 +139,16 @@ ListBox.addEventListener("change", function () {
     document
       .getElementById("phone")
       .setAttribute("placeholder", "[3/4]xxxxxxxx");
-    document.getElementById("phone").setAttribute("pattern", "[3-4]{9}");
+    document.getElementById("phone").setAttribute("pattern", "[3-4][0-9]{9}");
   } else if (selected == "+91") {
     document
       .getElementById("phone")
       .setAttribute("placeholder", "[7-9]xxxxxxxxx");
-    document.getElementById("phone").setAttribute("pattern", "[7-9]{9}");
+    document.getElementById("phone").setAttribute("pattern", "[7-9][0-9]{9}");
   } else if (selected == "+1") {
     document
       .getElementById("phone")
       .setAttribute("placeholder", "[AAA]BBB-CCCC");
-    document
-      .getElementById("phone")
-      .setAttribute("pattern", "[2-9][0-9][0-9]{7}");
+    document.getElementById("phone").setAttribute("pattern", "[2-9][0-9]{9}");
   }
 });

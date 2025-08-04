@@ -1,6 +1,6 @@
 <?php
 
-$prompt = "You are given the name of an item [Water Gun]. Your task is to determine whether this item is something that a person could realistically lose within the premises of an educational institute or organization and would reasonably report as lost (e.g., pen, bag, laptop, ID card).
+$prompt = "You are given the name of an item [Car]. Your task is to determine whether this item is something that a person could realistically lose within the premises of an educational institute or organization and would reasonably report as lost (e.g., pen, bag, laptop, ID card).
 Return Yes if the item is common, portable, and realistic to lose in such an environment.
 Return No if the item is too large, uncommon, absurd, or implausible to be lost or reported in such a context (e.g., tank, missile, refrigerator).
 Examples:

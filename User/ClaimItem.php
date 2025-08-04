@@ -75,14 +75,14 @@
                                         {
                                             if($i == 0){
                                         ?>
-                                        <div class="mySlides active">
+                                        <div class="mySlides active" id = "testSlide" data-val="<?php echo $query_run2->num_rows; ?>">
                                                 <img src="<?=$itemphoto['Path']?>" alt="Slide <?=$i+1?>">
                                             </div>
                                         <?php
                                         }
                                         else{
                                         ?>
-                                            <div class="mySlides">
+                                            <div class="mySlides" id = "testSlide" data-val="<?php echo $query_run2->num_rows; ?>">
                                             <img src="<?=$itemphoto['Path']?>" alt="Slide <?=$i+1?>">
                                             </div>
                                         <?php

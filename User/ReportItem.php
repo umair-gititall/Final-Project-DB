@@ -11,13 +11,13 @@ if ($conn->connect_error) {
 
 $name = $_POST['name'];
 $email = $_POST['email'];
-$area = $_POST['ListBox'];
+$area = $_POST['listbox'];
 $phone = $area . $_POST['phone'];
 $item = $_POST['item'];
 $date = $_POST['date'];
 $location = $_POST['location'];
 $description = $_POST['description'];
-
+echo $phone;
 $sanitized_email = filter_var($email, FILTER_SANITIZE_EMAIL);
 
 if (filter_var($sanitized_email, FILTER_VALIDATE_EMAIL)) {
