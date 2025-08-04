@@ -70,15 +70,13 @@
                                         $sql2 = "SELECT * FROM ItemPhoto Where ItemID = ".$row['ItemID'];
                                         $query_run2 = mysqli_query($conn, $sql2);
 
-                                        $i=0;
                                         foreach($query_run2 as $itemphoto)
                                         {
                                         ?>
                                             <div class="mySlides" id = <?= $row['ItemID'] ?>>
-                                            <img src="<?=$itemphoto['Path']?>" alt="Slide <?=$i+1?>">
+                                            <img src="<?=$itemphoto['Path']?>">
                                             </div>
                                         <?php
-                                        $i++;
                                         }
                                         ?>
                                             <!-- Navigation buttons -->

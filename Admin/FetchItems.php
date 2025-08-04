@@ -182,6 +182,7 @@ $adminID = $_SESSION['Admin_ID'];
                                     <input type="hidden" name="ItemID" value="<?= $row['ItemID'] ?>">
                                     <input type="hidden" name="ReporterName" value="<?= $row['ReporterName'] ?>">
                                     <input type="hidden" name="ReporterEmail" value="<?= $row['Email'] ?>">
+                                    <?= $row['Description'] ?>
                                     <textarea name="Question" class="Answer"
                                         placeholder="Q. Enter Your Question Here?"></textarea>
                                     <button id="SubmitButton" style="width: 30%; margin: 25px;">Fetch</button>
