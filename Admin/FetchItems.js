@@ -67,3 +67,36 @@ document.querySelectorAll(".apply-popup").forEach((popup) => {
     });
   }
 });
+
+async function downloadZip(folderPath) {
+    try {
+        const zip = new JSZip();
+        const response = await fetch(`ListItems.php?folder=${encodeURIComponent(folderPath)}`);
+
+        if (!response.ok) throw new Error("Could not load file list");
+
+        const imageUrls = await response.json();
+
+        if (imageUrls.length === 0) {
+            alert("No images found.");
+            return;
+        }
+
+        for (let url of imageUrls) {
+            const res = await fetch(url);
+            if (!res.ok) {
+                console.warn(`Skipping: ${url}`);
+                continue;
+            }
+            const blob = await res.blob();
+            const filename = url.split("/").pop();
+            zip.file(filename, blob);
+        }
+
+        const content = await zip.generateAsync({ type: "blob" });
+        saveAs(content, "download.zip");
+    } catch (err) {
+        console.error("Download ZIP error:", err);
+        alert("Error downloading ZIP. Check console for details.");
+    }
+}

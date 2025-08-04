@@ -32,12 +32,12 @@ $adminID = $_SESSION['Admin_ID'];
         $sql5 = "UPDATE Item SET Verification_Question = '$question', Status = 'Fetched' WHERE ItemID = '$itemID'";
         mysqli_query($conn, $sql5);
 
-        require_once '../../Requirements/LFMS/mailer.php';
+        // require_once '../../Requirements/LFMS/mailer.php';
         $name = $_POST['ReporterName'];
         $reporterEmail = $_POST['ReporterEmail'];
-        $htmlcontent = file_get_contents('../Email/ItemFetched.html');
-        $htmlcontent = str_replace('Thank you ', 'Thank you '.$name.' ', $htmlcontent);
-        $result = sendMail($reporterEmail, 'Item Fetched Successfully', $htmlcontent);
+        // $htmlcontent = file_get_contents('../Email/ItemFetched.html');
+        // $htmlcontent = str_replace('Thank you ', 'Thank you '.$name.' ', $htmlcontent);
+        // $result = sendMail($reporterEmail, 'Item Fetched Successfully', $htmlcontent);
 
     }
 ?>
@@ -182,10 +182,11 @@ $adminID = $_SESSION['Admin_ID'];
                                     <input type="hidden" name="ItemID" value="<?= $row['ItemID'] ?>">
                                     <input type="hidden" name="ReporterName" value="<?= $row['ReporterName'] ?>">
                                     <input type="hidden" name="ReporterEmail" value="<?= $row['Email'] ?>">
+                                    <a id = "DownloadIcon" onclick="downloadZip('<?= dirname($itemphoto['Path']) ?>')"><img style="height: 100%; width: 100%;" src="../Assets/Icons/Download.svg" alt=""></a>
                                     <?= $row['Description'] ?>
                                     <textarea name="Question" class="Answer"
                                         placeholder="Q. Enter Your Question Here?"></textarea>
-                                    <button id="SubmitButton" style="width: 30%; margin: 25px;">Fetch</button>
+                                    <button class="SubmitButton" style="width: 30%; margin: 25px;">Fetch</button>
                                 </form>
                             </div>
                         </div>
@@ -201,6 +202,8 @@ $adminID = $_SESSION['Admin_ID'];
     </div>
     <script src="FetchItems.js"></script>
     <script src="../Cursor.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
 </body>
 
 </html>

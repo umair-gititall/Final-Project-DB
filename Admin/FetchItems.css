@@ -481,15 +481,15 @@
 }
 
 #Photo{
-    height: 50%;
-    width: 90%;
+    height: 70%;
+    width: 75%;
     border-radius: 50px;
 }
 
 .Photo {
-    max-width: 600px;
+    max-width: 800px;
     position: relative;
-    margin: 50px auto;
+    margin-top: 50px;
     overflow: hidden;
     border-radius: 10px;
 }
@@ -540,6 +540,11 @@
     background-color: rgba(255, 255, 255, 0.2);
 }
 
+#DownloadIcon{
+    height: 30px; 
+    width: 30px;
+    margin-bottom: 8px;
+}
 
 .Answer
 {
@@ -569,7 +574,7 @@
     display: none;
 }
 
-#SubmitButton {
+.SubmitButton {
     width: 95%;
     padding: 10px;
     margin: 15px;
@@ -580,4 +585,12 @@
     background-color: navajowhite;
     text-align: center;
     color: rgb(78, 78, 78);
+}
+
+div{
+    border: 2px solid black;
+}
+
+a{
+    border: 2px solid rgb(189, 63, 63);
 }
