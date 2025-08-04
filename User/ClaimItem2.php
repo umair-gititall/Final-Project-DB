@@ -17,15 +17,33 @@
         $sql7 = "SELECT ItemName FROM Item WHERE ItemID = ".$itemid;
         $query_run7 = ($conn->query($sql7))->fetch_assoc();
 
-        $sanitized_email = filter_var($email, FILTER_SANITIZE_EMAIL);
+        
 
-if (filter_var($sanitized_email, FILTER_VALIDATE_EMAIL)) {
+    function validateEmailViaNode($email) {
+        $data = json_encode(["email" => $email]);       
+        $ch = curl_init('http://localhost:3001/validate');
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, [
+            'Content-Type: application/json',
+            'Content-Length: ' . strlen($data)
+    ]);
+
+    $response = curl_exec($ch);
+    curl_close($ch);
+
+    $result = json_decode($response, true);
+    return $result['valid'] ?? false;
+}
+
+
+
+if (validateEmailViaNode($email)) {
         require_once '../../Requirements/LFMS/mailer.php';
         $htmlcontent = file_get_contents('../Email/ClaimSubmitted.html');
         $htmlcontent = str_replace('[Item Name Will Appear Here]', $query_run7['ItemName'], $htmlcontent);
         $htmlcontent = str_replace('Thank you ', 'Thank you '.$name.' ', $htmlcontent);
-        
-        $result = sendMail($email, 'Claim Request Sent', $htmlcontent);
 
         $sql_check = "SELECT UserID FROM User WHERE Email = '$email'";
         $result_check = $conn->query($sql_check);
@@ -85,6 +103,7 @@ if (filter_var($sanitized_email, FILTER_VALIDATE_EMAIL)) {
                 }
             }
         }
+        $result = sendMail($email, 'Claim Request Sent', $htmlcontent);
         echo "Claim Request submitted successfully!";
         }
         else {

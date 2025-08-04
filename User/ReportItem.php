@@ -17,13 +17,32 @@ $item = $_POST['item'];
 $date = $_POST['date'];
 $location = $_POST['location'];
 $description = $_POST['description'];
-echo $phone;
-$sanitized_email = filter_var($email, FILTER_SANITIZE_EMAIL);
 
-if (filter_var($sanitized_email, FILTER_VALIDATE_EMAIL)) {
+
+function validateEmailViaNode($email) {
+    $data = json_encode(["email" => $email]);
+
+    $ch = curl_init('http://localhost:3001/validate');
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_POST, true);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, [
+        'Content-Type: application/json',
+        'Content-Length: ' . strlen($data)
+    ]);
+
+    $response = curl_exec($ch);
+    curl_close($ch);
+
+    $result = json_decode($response, true);
+    return $result['valid'] ?? false;
+}
+
+
+
+if (validateEmailViaNode($email)) {
 require_once '../../Requirements/LFMS/mailer.php';
 $htmlcontent = file_get_contents('../Email/ReportSubmitted.html');
-$result = sendMail($email, 'Item Reported Successfully', $htmlcontent);
 
 $sql_check = "SELECT ReporterID FROM Reporter WHERE Email = '$email'";
 $result_check = $conn->query($sql_check);
@@ -84,7 +103,7 @@ if ($query_run) {
             $imgStmt = $conn->query($imgSql);
         }
     }
-
+    $result = sendMail($email, 'Item Reported Successfully', $htmlcontent);
     echo "Report submitted successfully!";
 } else {
     echo "Failed to submit report.";
