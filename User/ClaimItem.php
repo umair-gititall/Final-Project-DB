@@ -55,7 +55,7 @@
                             <?= $row['Found_Date']; ?>
                         </div>
                         <?php $popupId = uniqid('popup_'); ?>
-                        <button class="apply-btn" data-popup-id="<?= $popupId ?>">Apply</button>
+                        <button class="apply-btn" data-popup-id="<?= $popupId ?>" id= "<?= $row['ItemID'] ?>">Apply</button>
                     </div>
                     <?php $formId = uniqid('AnswerForm_'); ?>
                     <form id="<?= $formId ?>" method="post" action="ClaimItem2.php" enctype="multipart/form-data">
@@ -73,26 +73,17 @@
                                         $i=0;
                                         foreach($query_run2 as $itemphoto)
                                         {
-                                            if($i == 0){
                                         ?>
-                                        <div class="mySlides active" id = "testSlide" data-val="<?php echo $query_run2->num_rows; ?>">
-                                                <img src="<?=$itemphoto['Path']?>" alt="Slide <?=$i+1?>">
-                                            </div>
-                                        <?php
-                                        }
-                                        else{
-                                        ?>
-                                            <div class="mySlides" id = "testSlide" data-val="<?php echo $query_run2->num_rows; ?>">
+                                            <div class="mySlides" id = <?= $row['ItemID'] ?>>
                                             <img src="<?=$itemphoto['Path']?>" alt="Slide <?=$i+1?>">
                                             </div>
                                         <?php
-                                        }
                                         $i++;
-                                    }
+                                        }
                                         ?>
                                             <!-- Navigation buttons -->
-                                            <a class="prev" onclick="changeSlide(-1)">&#10094;</a>
-                                            <a class="next" onclick="changeSlide(1)">&#10095;</a>
+                                            <a class="prev" id = <?=$row['ItemID']?>>&#10094;</a>
+                                            <a class="next" id = <?=$row['ItemID']?>>&#10095;</a>
 
                                         </div>  
                                 <input type="hidden" name="ItemID" value="<?= $row['ItemID'] ?>">

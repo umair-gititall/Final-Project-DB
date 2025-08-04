@@ -12,6 +12,35 @@ const iconMap = {
 };
 
 window.addEventListener("DOMContentLoaded", () => {
+  // Images SlideShow
+  let slideIndex = 0;
+
+  const slides = document.querySelectorAll(".mySlides");
+
+  let totalitems = 0,
+    items = [],
+    itemquantity = [0];
+
+  for (let i = 0; i < slides.length; i++) {
+    if (items.includes(slides[i].id)) continue;
+    items.push(slides[i].id);
+    totalitems++;
+  }
+
+  for (let i = 0; i < items.length; i++) {
+    if (i >= itemquantity.length) itemquantity.push(0);
+    for (let j = 0; j < slides.length; j++)
+      if (items[i] == slides[j].id) itemquantity[i]++;
+  }
+
+  let seperatedslides = new Array(totalitems);
+
+  for (let i = 0, j = 0; i < totalitems; i++) {
+    seperatedslides[i] = new Array(itemquantity[i]);
+    for (let k = 0; k < itemquantity[i]; j++, k++)
+      seperatedslides[i][k] = slides[j];
+  }
+
   const forms = document.querySelectorAll("form[id^='AnswerForm_']");
 
   forms.forEach((form) => {
@@ -100,6 +129,12 @@ window.addEventListener("DOMContentLoaded", () => {
 
   applyButtons.forEach((button) => {
     button.addEventListener("click", () => {
+      let i = 0;
+      let test = true;
+
+      for (; i < items.length; i++) if (items[i] == button.id) break;
+      seperatedslides[i][0].classList.add("active");
+
       const popupId = button.getAttribute("data-popup-id");
       const applypopup = document.getElementById(popupId);
       const cross = applypopup.querySelector(".Cross");
@@ -115,6 +150,8 @@ window.addEventListener("DOMContentLoaded", () => {
         setTimeout(() => {
           applypopup.style.display = "none";
         }, 800);
+
+        seperatedslides[i][0].classList.remove("active");
       });
     });
   });
@@ -128,33 +165,56 @@ window.addEventListener("DOMContentLoaded", () => {
     index = (index + 1) % words.length;
   }, 200);
 
-  // Images SlideShow
-  let slideIndex = 0;
-  const slides = document.querySelectorAll(".mySlides"); // List of slides
-  const dots = document.querySelectorAll(".dot");
-  let timer;
+  document.querySelectorAll(".prev").forEach((btn) => {
+    btn.addEventListener("click", function () {
+      let i = 0;
+      let test = true;
 
-  const arr = [];
-  function showSlide(index) {
-    // Get data-val from the element with ID "testSlide"
-    let max = 0;
-    // Hide all slides
-    let rows;
-    slides.forEach((slide) => {
-      slide.classList.remove("active");
-      arr[max] = slide.dataset.val;
-      max++;
-      rows = slide.dataset.val;
+      for (; i < items.length; i++) if (items[i] == btn.id) break;
+
+      seperatedslides[i].forEach((s) => {
+        if (s.classList.contains("active")) test = false;
+      });
+
+      if (test == true) {
+        slides.forEach((slide) => {
+          slide.classList.remove("active");
+        });
+        slideIndex = 0;
+      }
+
+      seperatedslides[i][slideIndex].classList.remove("active");
+      slideIndex =
+        (slideIndex + seperatedslides[i].length - 1) %
+        seperatedslides[i].length;
+      seperatedslides[i][slideIndex].classList.add("active");
     });
-  }
-  console.log(arr[0]);
-  slideIndex = (index + arr[index]) % arr[index];
-  //   if (rows != 1) slideIndex++;
-  slides[slideIndex].classList.add("active");
+  });
 
-  window.changeSlide = function (n) {
-    showSlide(slideIndex + n);
-  };
+  document.querySelectorAll(".next").forEach((btn) => {
+    btn.addEventListener("click", function () {
+      let i = 0;
+      let test = true;
 
-  showSlide(slideIndex);
+      for (; i < items.length; i++) if (items[i] == btn.id) break;
+
+      seperatedslides[i].forEach((s) => {
+        if (s.classList.contains("active")) test = false;
+      });
+
+      if (test == true) {
+        slides.forEach((slide) => {
+          slide.classList.remove("active");
+          console.log(slideIndex);
+        });
+        slideIndex = 0;
+      }
+
+      seperatedslides[i][slideIndex].classList.remove("active");
+      slideIndex =
+        (slideIndex + seperatedslides[i].length + 1) %
+        seperatedslides[i].length;
+      seperatedslides[i][slideIndex].classList.add("active");
+    });
+  });
 });
