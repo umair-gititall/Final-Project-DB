@@ -40,6 +40,16 @@
 
 
 if (validateEmailViaNode($email)) {
+    $sql8 = "select Verification_Question from Item where ItemID = '$itemid'";
+    $res = $conn->query($sql8)->fetch_assoc();
+    $response = file_get_contents("http://localhost/LFMS/Ai.php?question=" . urlencode($res['Verification_Question']) ."&answer=" . urlencode($answer). "&number=2");
+    $response = trim($response);
+    if ($response == "No") {
+        echo "Invalid Item";
+        exit;
+    }
+
+
         require_once '../../Requirements/LFMS/mailer.php';
         $htmlcontent = file_get_contents('../Email/ClaimSubmitted.html');
         $htmlcontent = str_replace('[Item Name Will Appear Here]', $query_run7['ItemName'], $htmlcontent);

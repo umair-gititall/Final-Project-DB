@@ -3,6 +3,9 @@
 $promptno = $_GET['number'] ?? null;
 $item = $_GET['item'] ?? null;
 $prompt = "";
+$question = $_GET['question'] ?? null;
+$answer = $_GET['answer'] ?? null;
+
 
 if (!$promptno) {
     echo json_encode(["error" => "Missing ID"]);
@@ -21,7 +24,9 @@ Air Conditioner → No";
 }
 else if($promptno == 2)
 {
-
+    $prompt = "Is the answer a possible correct or partially correct response to the question? Reply only Yes or No.
+Question: " . $question .
+" Answer: ". $answer;
 }
 
 $data = json_encode(["prompt" => $prompt]);
