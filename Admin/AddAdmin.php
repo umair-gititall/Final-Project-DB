@@ -2,7 +2,7 @@
 
 session_start();
 if (!isset($_SESSION['Admin_Token'])) {
-    header("Location:  index.html");
+    header("Location:  index.php");
     exit();
 }
 $adminID = $_SESSION['Admin_ID'];

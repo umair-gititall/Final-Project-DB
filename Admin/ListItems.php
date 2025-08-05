@@ -28,7 +28,7 @@ foreach ($files as $file) {
     if (is_file($filePath)) {
         $relativeToRoot = str_replace($projectRoot, '', realpath($filePath));
         $relativeToRoot = str_replace(DIRECTORY_SEPARATOR, '/', $relativeToRoot);
-        $imagePaths[] = $relativeToRoot;
+        $imagePaths[] = '/LFMS' . $relativeToRoot;
     }
 }
 
