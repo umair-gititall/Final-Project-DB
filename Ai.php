@@ -2,7 +2,6 @@
 
 $promptno = $_GET['number'] ?? null;
 $item = $_GET['item'] ?? null;
-$description = $_GET['description'] ?? null;
 $prompt = "";
 
 if (!$promptno) {
@@ -18,9 +17,7 @@ Pen → Yes
 Laptop → Yes
 Tank → No
 Notebook → Yes
-Air Conditioner → No
-also check if this is a valid item description for that item [".$description."]
-";
+Air Conditioner → No";
 }
 else if($promptno == 2)
 {

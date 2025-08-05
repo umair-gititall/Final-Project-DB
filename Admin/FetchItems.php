@@ -185,7 +185,7 @@ $adminID = $_SESSION['Admin_ID'];
                                     <a id = "DownloadIcon" onclick="downloadZip('<?= dirname($itemphoto['Path']) ?>')"><img style="height: 100%; width: 100%;" src="../Assets/Icons/Download.svg" alt=""></a>
                                     <?= $row['Description'] ?>
                                     <textarea name="Question" class="Answer"
-                                        placeholder="Q. Enter Your Question Here?"></textarea>
+                                        placeholder="Q. Enter Your Question Here?" required></textarea>
                                     <button class="SubmitButton" style="width: 30%; margin: 25px;">Fetch</button>
                                 </form>
                             </div>
