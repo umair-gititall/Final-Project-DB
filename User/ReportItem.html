@@ -6,9 +6,17 @@
     <title>LFMS</title>
     <link rel="Icon" href="../assets/Favicon.png" type="image/x-icon">
     <link rel="stylesheet" href="ReportItem.css">
+    <link rel="stylesheet" href="../Loading.css">
 </head>
 
 <body>
+    <div id="global_loading">
+        <div class="loading-container">
+            <div class="loading-text">
+                Loading
+            </div>
+        </div>
+    </div>
     <div class="curzr" hidden>
         <div class="curzr-dot"></div>
     </div>
@@ -48,9 +56,7 @@
                     </div>
                 </div>
                 <div class="lowerbox">
-                    <textarea name="description" id="Description" placeholder="Describe Item" required
-                        oninput="checkWordLimit(this, 50)"></textarea>
-                    <p class="word-counter" id="wordCountMsg"></p>
+                    <textarea name="description" id="Description" placeholder="Describe Item" required></textarea>
                 </div>
             </div>
             <div id="ReportContainer">

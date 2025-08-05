@@ -83,6 +83,7 @@ window.addEventListener("DOMContentLoaded", () => {
     });
 
     form.addEventListener("submit", function (e) {
+      document.getElementById("global_loading").style.zIndex = 3;
       e.preventDefault();
 
       const name = form.querySelector('input[placeholder="Name"]').value;
@@ -109,7 +110,7 @@ window.addEventListener("DOMContentLoaded", () => {
         .then((res) => res.text())
         .then((data) => {
           alert(data);
-          window.location.href = "../index.html";
+          window.location.href = "ClaimItem.php";
         })
         .catch((err) => {
           console.error("Upload failed", err);

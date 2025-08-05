@@ -17,8 +17,6 @@ $item = $_POST['item'];
 $date = $_POST['date'];
 $location = $_POST['location'];
 $description = $_POST['description'];
-$response = file_get_contents("http://localhost/LFMS/Ai.php?item=" . urlencode($item) . "&number=1");
-$response = trim($response);
 
 function validateEmailViaNode($email) {
     $data = json_encode(["email" => $email]);
@@ -40,12 +38,15 @@ function validateEmailViaNode($email) {
 }
 
 
-if ($response == "No") {
-    echo "Invalid Item";
-    exit;
-}
 
 if (validateEmailViaNode($email)) {
+$response = file_get_contents("http://localhost/LFMS/Ai.php?item=" . urlencode($item) . "&number=1");
+$response = trim($response);
+    if ($response == "No") {
+        echo "Invalid Item";
+        exit;
+    }
+    
 require_once '../../Requirements/LFMS/mailer.php';
 $htmlcontent = file_get_contents('../Email/ReportSubmitted.html');
 

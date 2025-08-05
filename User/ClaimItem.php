@@ -16,9 +16,17 @@
     <title>Claim Item</title>
     <link rel="Icon" href="../assets/Favicon.png" type="image/x-icon">
     <link rel="stylesheet" href="ClaimItem.css"  >
+    <link rel="stylesheet" href="../Loading.css" class="css">
 </head>
 
 <body>
+    <div id="global_loading">
+        <div class="loading-container">
+            <div class="loading-text">
+                Loading
+            </div>
+        </div>
+    </div>
     <div class="curzr" hidden>
         <div class="curzr-dot"></div>
     </div>
