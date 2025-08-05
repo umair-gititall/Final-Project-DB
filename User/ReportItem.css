@@ -235,6 +235,15 @@ select {
     display: none;
 }
 
+.word-counter {
+    position: absolute;
+    bottom: 5px;
+    right: 10px;
+    font-size: 12px;
+    color: #999;
+    pointer-events: none;
+}
+
 #ReportContainer {
     height: 8%;
     width: 15%;

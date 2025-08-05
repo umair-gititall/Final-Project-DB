@@ -152,3 +152,17 @@ ListBox.addEventListener("change", function () {
     document.getElementById("phone").setAttribute("pattern", "[2-9][0-9]{9}");
   }
 });
+
+function checkWordLimit(textarea, limit) {
+  const words = textarea.value.trim().split(/\s+/);
+  const wordCount = words.filter((word) => word.length > 0).length;
+
+  const msg = document.getElementById("wordCountMsg");
+
+  if (wordCount > limit) {
+    msg.textContent = `Too long! Max ${limit} words allowed`;
+    textarea.value = words.slice(0, limit).join(" ");
+  } else {
+    msg.textContent = `${wordCount}/${limit} words`;
+  }
+}

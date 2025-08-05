@@ -48,7 +48,9 @@
                     </div>
                 </div>
                 <div class="lowerbox">
-                    <textarea name="description" id="Description" placeholder="Describe Item" required></textarea>
+                    <textarea name="description" id="Description" placeholder="Describe Item" required
+                        oninput="checkWordLimit(this, 50)"></textarea>
+                    <p class="word-counter" id="wordCountMsg"></p>
                 </div>
             </div>
             <div id="ReportContainer">
