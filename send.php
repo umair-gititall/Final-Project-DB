@@ -14,7 +14,7 @@ Examples:
 $data = json_encode(["prompt" => $prompt]);
 
 // URL of the local Node.js server
-$url = 'http://localhost:3000/gemini';
+$url = 'http://5.5.5.5:4000/gemini';
 
 // Initialize cURL
 $ch = curl_init($url);
