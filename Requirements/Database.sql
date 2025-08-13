@@ -1,0 +1,80 @@
+CREATE DATABASE LostFoundDB;
+USE LostFoundDB;
+
+CREATE TABLE Reporter
+(
+  ReporterID INT PRIMARY KEY AUTO_INCREMENT,
+  ReporterName VARCHAR(30) NOT NULL, 
+  Email VARCHAR(50) UNIQUE,
+  PhoneNo VARCHAR(15) NOT NULL
+);
+
+CREATE TABLE User
+(
+  UserID INT PRIMARY KEY AUTO_INCREMENT,
+  UserName VARCHAR(30) NOT NULL,
+  PhoneNo VARCHAR(15) NOT NULL,
+  Email VARCHAR(50) UNIQUE
+);
+
+CREATE TABLE Admin
+(
+  Admin_ID INT PRIMARY KEY AUTO_INCREMENT,
+  Email VARCHAR(50) UNIQUE,
+  Name VARCHAR(30) NOT NULL,
+  Password VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE Item
+(
+  ItemID INT PRIMARY KEY AUTO_INCREMENT,
+  ItemName VARCHAR(30) NOT NULL,
+  Description TEXT NOT NULL,
+  Status VARCHAR(20) DEFAULT('Fetching'),
+  Found_Date DATE NOT NULL,
+  Found_Location VARCHAR(30) NOT NULL,
+  Verification_Question TEXT DEFAULT('To be updated...'),
+  ReporterID INT,
+  Admin_ID INT DEFAULT NULL,
+  FOREIGN KEY (ReporterID) REFERENCES Reporter(ReporterID),
+  FOREIGN KEY (Admin_ID) REFERENCES Admin(Admin_ID)
+);
+
+CREATE TABLE Claim_Request
+(
+  ClaimID INT PRIMARY KEY AUTO_INCREMENT,
+  Date_of_Claim DATE NOT NULL,
+  Claim_Status VARCHAR(15) DEFAULT('Not Approved'),
+  Answer TEXT NOT NULL,
+  UserID INT,
+  Admin_ID INT DEFAULT NULL,
+  ItemID INT,
+  FOREIGN KEY (UserID) REFERENCES User(UserID),
+  FOREIGN KEY (ItemID) REFERENCES Item(ItemID),
+  FOREIGN KEY (Admin_ID) REFERENCES Admin(Admin_ID)
+);
+
+CREATE TABLE ClaimPhoto
+(
+  Path VARCHAR(50) NOT NULL,
+  Description TEXT,
+  ClaimID INT,
+  FOREIGN KEY (ClaimID) REFERENCES Claim_Request(ClaimID)
+);
+
+CREATE TABLE SearchLostItems
+(
+  UserID INT,
+  ItemID INT,
+  PRIMARY KEY (UserID, ItemID),
+  FOREIGN KEY (UserID) REFERENCES User(UserID),
+  FOREIGN KEY (ItemID) REFERENCES Item(ItemID)
+);
+
+CREATE TABLE ItemPhoto
+(
+  Path VARCHAR(50) NOT NULL,
+  Description TEXT NOT NULL,
+  ItemID INT,
+  FOREIGN KEY (ItemID) REFERENCES Item(ItemID)
+);
