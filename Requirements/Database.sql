@@ -1,3 +1,4 @@
+DROP USER IF EXISTS 'LostFoundSystem'@'localhost';
 DROP DATABASE IF EXISTS LostFoundDB;
 CREATE DATABASE LostFoundDB;
 USE LostFoundDB;
