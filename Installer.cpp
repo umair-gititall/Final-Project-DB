@@ -112,7 +112,8 @@ class Installer {
     } while (true);
 
     system("rm /tmp/check.txt");
-    system("sudo chown nobody:nogroup -R /var/www/html/Requirements");
+    system("sudo chown -R nobody:nogroup /var/www/html/Requirements");
+
     validator.close();
     validator.open("/var/www/html/Requirements/Ai/.env", ios::out);
     validator << "GOOGLE_API_KEY=" << installer;
