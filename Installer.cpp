@@ -112,7 +112,7 @@ class Installer {
     } while (true);
 
     system("rm /tmp/check.txt");
-    system("sudo chown -R nobody:nogroup /var/www/html/Requirements");
+    system("sudo chown -R $USER:$USER /var/www/html/Requirements");
 
     validator.close();
     validator.open("/var/www/html/Requirements/Ai/.env", ios::out);
