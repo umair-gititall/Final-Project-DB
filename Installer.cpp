@@ -113,7 +113,7 @@ class Installer {
 
     system("rm /tmp/check.txt");
     validator.close();
-    validator.open("/var/www/html/Requirements/Ai/.env");
+    validator.open("/var/www/html/Requirements/Ai/.env", ios::out);
     validator << "GOOGLE_API_KEY=" << installer;
 
     validator.close();

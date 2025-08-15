@@ -87,7 +87,7 @@ public:
   // Printing Menu
   void fancyMenu(string *options, int size, bool input,
                  string heading = "Main Menu") {
-    string spaces((width() - heading.length()) / 2, ' ');
+    string spaces((width() - heading.length() - 15) / 2, ' ');
 
     title(heading, false);
     for (int i = 0; i < size; i++) {
