@@ -9,7 +9,7 @@ $adminID = $_SESSION['Admin_ID'];
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-$servername = "5.5.5.5";
+$servername = "localhost";
 $username = "LostFoundSystem";
 $password = "LostFoundManagementSystem";
 $database = "LostFoundDB";

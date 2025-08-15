@@ -80,3 +80,5 @@ CREATE TABLE ItemPhoto
   ItemID INT,
   FOREIGN KEY (ItemID) REFERENCES Item(ItemID)
 );
+
+INSERT INTO Admin VALUES (1, 'admin@LFMS.com', 'Admin', '$2y$12$/9jdkTpwQ.Tqja1d2zTTwuJqkNt3H265ajW9zl/oGAX.kuL07c4di');

@@ -1,5 +1,5 @@
 <?php
-$host = "5.5.5.5";
+$host = "localhost";
 $user = "LostFoundSystem";
 $password = "LostFoundManagementSystem";
 $dbname = "LostFoundDB"; 
@@ -21,7 +21,7 @@ $description = $_POST['description'];
 function validateEmailViaNode($email) {
     $data = json_encode(["email" => $email]);
 
-    $ch = curl_init('http://5.5.5.5:4001/validate');
+    $ch = curl_init('http://localhost:3000/validate');
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($ch, CURLOPT_POST, true);
     curl_setopt($ch, CURLOPT_POSTFIELDS, $data);

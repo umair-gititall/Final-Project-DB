@@ -30,12 +30,6 @@ class Installer {
                "mysql-server php php-mysqli -y");
       system("clear");
 
-      // if (!(system("git -v") || system("node -v") || system("npm -v") ||
-      //       system("mysql -v") || system("php -v") ||
-      //       system("php -m | grep -i mysqli")))
-      //   if (system("apache2 -v") == 0 || system("apache -v") == 0 ||
-      //       system("httpd -v") == 0)
-      //     break;
       if (system("git -v") == 0 && system("node -v") == 0 &&
           system("npm -v") == 0 && system("mysql --version") == 0 &&
           system("php -v") == 0 && system("php -m | grep -i mysqli") == 0)
@@ -121,6 +115,17 @@ class Installer {
     validator.close();
   }
 
+  void FinalizeInstall() {
+    system("clear");
+    ui.title();
+    ui.fancyMenu(steps, 5, false);
+    ui.BoxedMessage("Installed Successfully!");
+    ui.title("Accessable at http://localhost/LFMS");
+    ui.BoxedMessage(
+        "To Setup Email Alerts - Edit /var/www/html/Requirements/mailer.php");
+    pause();
+  }
+
 public:
   Installer()
       : steps(new string[6]{"Determining OS", "Getting Required Tools",
@@ -155,10 +160,22 @@ public:
 
     steps[0] = "✅  " + steps[0];
 
+    system("clear");
     if (installer != "none")
       GetTools();
     else
       ui.BoxedMessage("OS not Supported!!");
+  }
+
+  ~Installer() {
+    delete[] steps;
+
+    if (installer != "none") {
+      ui.BoxedMessage("Deleting Unnecessary Files");
+      system("sudo rm /var/www/html/Requirements/Database.sql & sudo rm "
+             "/var/www/html/Installer.cpp & sudo rm "
+             "/var/www/html/Requirements/UI.h");
+    }
   }
 };
 

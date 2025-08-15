@@ -30,7 +30,7 @@ Question: " . $question .
 }
 
 $data = json_encode(["prompt" => $prompt]);
-$url = 'http://5.5.5.5:4000/gemini';
+$url = 'http://localhost:3000/gemini';
 
 // Initialize cURL
 $ch = curl_init($url);

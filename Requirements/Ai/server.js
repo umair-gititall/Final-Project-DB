@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const { GoogleGenAI } = require("@google/genai");
+const emailCheck = require("email-check");
 require("dotenv").config();
 
 const app = express();
@@ -36,7 +37,24 @@ app.post("/gemini", async (req, res) => {
   }
 });
 
+app.post("/validate", async (req, res) => {
+  const { email } = req.body;
+  if (!email) {
+    return res
+      .status(400)
+      .json({ valid: false, message: "Email required~! 😭" });
+  }
+
+  try {
+    const exists = await emailCheck(email);
+    res.json({ valid: exists });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ valid: false, message: "Validation error 😣" });
+  }
+});
+
 const PORT = 3000;
 app.listen(PORT, () => {
-  console.log(`✅ Node.js Gemini server running at http://localhost:${PORT}`);
+  console.log(`✅ Combined server running at http://localhost:${PORT}`);
 });

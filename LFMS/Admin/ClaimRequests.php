@@ -7,7 +7,7 @@ if (!isset($_SESSION['Admin_Token'])) {
 }
 $adminID = $_SESSION['Admin_ID'];
 
-$servername = "5.5.5.5";
+$servername = "localhost";
 $username = "LostFoundSystem";
 $password = "LostFoundManagementSystem";
 $database = "LostFoundDB";
@@ -28,7 +28,6 @@ if (filter_var($sanitized_email, FILTER_VALIDATE_EMAIL)) {
     require_once '../../Requirements/LFMS/mailer.php';
     $htmlcontent = file_get_contents('../Email/ClaimApproved.html');
     $htmlcontent = str_replace('[Item Name Will Appear Here]', $itemname, $htmlcontent);
-    $result = sendMail($email, 'Claim Request Approved', $htmlcontent);
     
     
     $sql4 = "UPDATE Claim_Request SET Claim_Status = 'Approved', Admin_ID = $adminID, Date_of_Claim = SYSDATE() WHERE ClaimID = $claimID AND ItemID NOT IN (SELECT ItemID FROM Claim_Request WHERE Claim_Status = 'Approved')";
@@ -37,7 +36,8 @@ if (filter_var($sanitized_email, FILTER_VALIDATE_EMAIL)) {
     $sql5 = "UPDATE Claim_Request SET Claim_Status = 'Disapproved', Admin_ID = $adminID, Date_of_Claim = SYSDATE() WHERE ItemID IN (SELECT ItemID FROM Claim_Request WHERE Claim_Status = 'Approved') AND Claim_Status = 'Not Approved'";
     mysqli_query($conn, $sql5);
     
-
+    
+    $result = sendMail($email, 'Claim Request Approved', $htmlcontent);
     header("Refresh: 0");
     exit();
 }
@@ -54,11 +54,11 @@ if (filter_var($sanitized_email, FILTER_VALIDATE_EMAIL)) {
     require_once '../../Requirements/LFMS/mailer.php';
     $htmlcontent = file_get_contents('../Email/ClaimRejected.html');
     $htmlcontent = str_replace('[Item Name Will Appear Here]', $itemname, $htmlcontent);
-    sendMail($email, 'Claim Request Rejected', $htmlcontent);
-
+    
     $sql6 = "UPDATE Claim_Request SET Claim_Status = 'Disapproved', Admin_ID = $adminID, Date_of_Claim = SYSDATE() WHERE ClaimID = $claimID";
     mysqli_query($conn, $sql6);
     
+    sendMail($email, 'Claim Request Rejected', $htmlcontent);
     header("Refresh: 0");
     exit();
 }

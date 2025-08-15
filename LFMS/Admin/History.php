@@ -7,7 +7,7 @@ if (!isset($_SESSION['Admin_Token'])) {
 }
 $adminID = $_SESSION['Admin_ID'];
 
-$servername = "5.5.5.5";
+$servername = "localhost";
 $username = "LostFoundSystem";
 $password = "LostFoundManagementSystem";
 $database = "LostFoundDB";

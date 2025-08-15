@@ -68,7 +68,7 @@
                 <h1>Admin Panel</h1>
             </span>
             <?php
-                $servername = "5.5.5.5";
+                $servername = "localhost";
                 $username = "LostFoundSystem";
                 $password = "LostFoundManagementSystem";
                 $database = "LostFoundDB";

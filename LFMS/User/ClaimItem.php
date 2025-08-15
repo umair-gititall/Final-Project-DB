@@ -1,5 +1,5 @@
 <?php
-    $servername = "5.5.5.5";
+    $servername = "localhost";
     $username = "LostFoundSystem";
     $password = "LostFoundManagementSystem";
     $database = "LostFoundDB";
